@@ -1,4 +1,4 @@
 ﻿namespace BullsAndCows.Core.Models;
 
-public record SecretCode(byte[] Value);
+public record SecretCode(int[] Value);
 

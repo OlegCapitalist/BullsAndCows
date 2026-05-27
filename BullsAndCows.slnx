@@ -7,11 +7,4 @@
     <Project Path="BullsAndCows.Core/BullsAndCows.Core.csproj" />
   </Folder>
   <Folder Name="/src/UI/" />
-  <Folder Name="/src/UI/Platforms/" />
-  <Folder Name="/src/UI/Platforms/Android/" />
-  <Folder Name="/src/UI/Platforms/Windows/" />
-  <Folder Name="/src/UI/Resources/" />
-  <Folder Name="/src/UI/Services/" />
-  <Folder Name="/src/UI/ViewModels/" />
-  <Folder Name="/src/UI/Views/" />
 </Solution>

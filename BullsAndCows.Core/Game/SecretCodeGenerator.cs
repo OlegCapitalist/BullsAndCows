@@ -6,10 +6,10 @@ namespace BullsAndCows.Core.Game;
 public class SecretCodeGenerator
 {
     private const int _codeLength = 4;
-    public SecretCode GetCode()
+    public SecretCode Generate()
     {
-        var digits = Enumerable.Range(0, 9).Select(i => (byte)i).ToList();
-        var result = new byte[_codeLength];
+        var digits = Enumerable.Range(0, 10).Select(i => (byte)i).ToList();
+        var result = new int[_codeLength];
 
         for (int i = 0; i < _codeLength; i++)
         {

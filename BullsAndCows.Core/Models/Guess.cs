@@ -1,6 +1,3 @@
 ﻿namespace BullsAndCows.Core.Models;
 
-public class Guess
-{
-
-}
+public record Guess(int[] Value);
