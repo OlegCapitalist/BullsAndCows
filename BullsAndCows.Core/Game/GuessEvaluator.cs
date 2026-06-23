@@ -1,8 +1,9 @@
-﻿using BullsAndCows.Core.Models;
+﻿using BullsAndCows.Core.Interfaces;
+using BullsAndCows.Core.Models;
 
 namespace BullsAndCows.Core.Game;
 
-public class GuessEvaluator
+public class GuessEvaluator : IGuessEvaluator
 {
     public GuessResult Evaluate(SecretCode secretCode, Guess guess)
     {

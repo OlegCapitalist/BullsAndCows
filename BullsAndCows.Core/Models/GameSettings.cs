@@ -4,6 +4,16 @@ using System.Text;
 
 namespace BullsAndCows.Core.Models;
 
-internal class GameSettings
+public class GameSettings
 {
+    public int CodeLength { get; }
+    public int? MaxAttempts { get; }
+
+    public GameSettings(int codeLength, int? maxAttempts = null)
+    {
+        CodeLength = codeLength;
+        MaxAttempts = maxAttempts;
+    }
+
+    public static GameSettings Classic() => new(4);
 }
