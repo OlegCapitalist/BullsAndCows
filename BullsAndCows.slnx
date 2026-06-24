@@ -9,5 +9,7 @@
   <Folder Name="/src/Core/">
     <Project Path="BullsAndCows.Core/BullsAndCows.Core.csproj" />
   </Folder>
-  <Folder Name="/src/UI/" />
+  <Project Path="BullsAndCows.UI/BullsAndCows.UI.csproj" Id="4b312ef1-5ad9-4902-b392-b056bfb2ac36">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>
