@@ -1,0 +1,120 @@
+BullsAndCows/
+│
+├── src/
+│   │
+│   ├── BullsAndCows.Maui/
+│   │   ├── Platforms/
+│   │   │   ├── Android/
+│   │   │   ├── iOS/
+│   │   │   ├── MacCatalyst/
+│   │   │   └── Windows/
+│   │   │
+│   │   ├── Resources/
+│   │   │   ├── AppIcon/
+│   │   │   ├── Fonts/
+│   │   │   ├── Images/
+│   │   │   ├── Raw/
+│   │   │   └── Styles/
+│   │   │
+│   │   ├── Views/
+│   │   │   ├── MainPage.xaml
+│   │   │   ├── GamePage.xaml
+│   │   │   ├── SettingsPage.xaml
+│   │   │   ├── RulesPage.xaml
+│   │   │   └── StatisticsPage.xaml
+│   │   │
+│   │   ├── ViewModels/
+│   │   │   ├── MainViewModel.cs
+│   │   │   ├── GameViewModel.cs
+│   │   │   ├── SettingsViewModel.cs
+│   │   │   ├── RulesViewModel.cs
+│   │   │   └── StatisticsViewModel.cs
+│   │   │
+│   │   ├── Services/
+│   │   │   ├── NavigationService.cs
+│   │   │   ├── DialogService.cs
+│   │   │   └── PreferencesService.cs
+│   │   │
+│   │   ├── App.xaml
+│   │   ├── AppShell.xaml
+│   │   ├── MauiProgram.cs
+│   │   └── BullsAndCows.Maui.csproj
+│   │
+│   ├── BullsAndCows.Core/
+│   │   ├── Game/
+│   │   │   ├── GameSession.cs
+│   │   │   ├── GameEngine.cs
+│   │   │   ├── GuessEvaluator.cs
+│   │   │   ├── SecretCodeGenerator.cs
+│   │   │   └── GameRules.cs
+│   │   │
+│   │   ├── Models/
+│   │   │   ├── SecretCode.cs
+│   │   │   ├── Guess.cs
+│   │   │   ├── GuessResult.cs
+│   │   │   ├── GuessHistoryItem.cs
+│   │   │   └── GameSettings.cs
+│   │   │
+│   │   ├── Enums/
+│   │   │   └── GameStatus.cs
+│   │   │
+│   │   ├── Abstractions/
+│   │   │   ├── ISecretCodeGenerator.cs
+│   │   │   ├── IGuessEvaluator.cs
+│   │   │   └── IGameEngine.cs
+│   │   │
+│   │   └── BullsAndCows.Core.csproj
+│   │
+│   ├── BullsAndCows.Application/
+│   │   ├── Services/
+│   │   │   ├── GameAppService.cs
+│   │   │   ├── StatisticsService.cs
+│   │   │   └── SettingsService.cs
+│   │   │
+│   │   ├── Abstractions/
+│   │   │   ├── IGameAppService.cs
+│   │   │   ├── IStatisticsService.cs
+│   │   │   └── ISettingsService.cs
+│   │   │
+│   │   ├── Dtos/
+│   │   │   ├── StartGameRequest.cs
+│   │   │   ├── MakeGuessRequest.cs
+│   │   │   ├── GuessResultDto.cs
+│   │   │   └── GameStateDto.cs
+│   │   │
+│   │   └── BullsAndCows.Application.csproj
+│   │
+│   └── BullsAndCows.Infrastructure/
+│       ├── Persistence/
+│       │   ├── AppDbContext.cs
+│       │   ├── Entities/
+│       │   │   ├── GameSessionEntity.cs
+│       │   │   ├── GuessEntity.cs
+│       │   │   └── StatisticsEntity.cs
+│       │   │
+│       │   └── Repositories/
+│       │       ├── GameHistoryRepository.cs
+│       │       └── StatisticsRepository.cs
+│       │
+│       ├── Storage/
+│       │   ├── LocalSettingsStorage.cs
+│       │   └── JsonFileStorage.cs
+│       │
+│       └── BullsAndCows.Infrastructure.csproj
+│
+├── tests/
+│   │
+│   ├── BullsAndCows.Core.Tests/
+│   │   ├── GuessEvaluatorTests.cs
+│   │   ├── SecretCodeGeneratorTests.cs
+│   │   └── GameEngineTests.cs
+│   │
+│   ├── BullsAndCows.Application.Tests/
+│   │   └── GameAppServiceTests.cs
+│   │
+│   └── BullsAndCows.Tests.Shared/
+│       └── TestData.cs
+│
+├── Directory.Build.props
+├── BullsAndCows.sln
+└── README.md
