@@ -4,9 +4,30 @@
              x:Class="BullsAndCows.UI.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+            <HorizontalStackLayout Spacing="10">
+                <Button
+                    x:Name="NewGameBtn"
+                    Text="Новая игра"
+                    SemanticProperties.Hint="Начать новую игру"
+                    Clicked="OnNewGameClicked"
+                    HorizontalOptions="Fill" />
+                <Button
+                    x:Name="ExitBtn"
+                    Text="Выход"
+                    SemanticProperties.Hint="Выход из игры"
+                    Clicked="OnExitClicked"
+                    HorizontalOptions="Fill" />
+                <Button
+                    x:Name="RulesBtn"
+                    Text="Правила"
+                    SemanticProperties.Hint="Показать правила игры"
+                    Clicked="OnRulesClicked"
+                    HorizontalOptions="Fill" />
+            </HorizontalStackLayout>
+
+            <Label 
+                Text="История попыток"/>
             <Image
                 Source="dotnet_bot.png"
                 HeightRequest="185"
