@@ -27,9 +27,20 @@
             </HorizontalStackLayout>
 
             <Label 
+                Text="Попытка "
+                FontSize="20"
+                FontAttributes="Bold"/>
+            
+            <Label 
                 Text="История попыток"/>
+
+            <Grid >
+                
+            </Grid>
+            
             <Image
                 Source="dotnet_bot.png"
+                IsVisible="False"
                 HeightRequest="185"
                 Aspect="AspectFit"
                 SemanticProperties.Description="dot net bot in a submarine number ten" />
