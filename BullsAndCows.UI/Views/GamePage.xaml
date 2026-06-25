@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BullsAndCows.UI.Views.GamePage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+            <HorizontalStackLayout Padding="10,0" Spacing="10">
+                <Button
+                    x:Name="NewGameBtn"
+                    Text="Новая игра"
+                    SemanticProperties.Hint="Начать новую игру"
+                    Clicked="OnNewGameClicked"
+                    HorizontalOptions="Fill" />
+                <Button
+                    x:Name="ExitBtn"
+                    Text="Выход"
+                    SemanticProperties.Hint="Выход из игры"
+                    Clicked="OnExitClicked"
+                    HorizontalOptions="Fill" />
+                <Button
+                    x:Name="RulesBtn"
+                    Text="Правила⚙"
+                    SemanticProperties.Hint="Показать правила игры"
+                    Clicked="OnRulesClicked"
+                    HorizontalOptions="Fill" />
+            </HorizontalStackLayout>
+
+            <Label 
+                Text="Попытка "
+                FontSize="20"
+                FontAttributes="Bold"/>
+            
+            <Label 
+                Text="История попыток"/>
+
+            <Editor
+                IsReadOnly="True" 
+                Text="{Binding SecretNumber}" />
+
+
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                  ColumnDefinitions="*, *, *"
+                  RowSpacing="8"
+                  ColumnSpacing="8"
+                  Padding="16,8,16,16">
+
+                <!-- 1 строка -->
+                <Button Grid.Row="0" Grid.Column="0"
+                        Text="1"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="1" />
+
+                <Button Grid.Row="0" Grid.Column="1"
+                        Text="2"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="2" /> 
+
+                <Button Grid.Row="0" Grid.Column="2"
+                        Text="3"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="3" />
+
+                <!-- 2 строка -->
+                <Button Grid.Row="1" Grid.Column="0"
+                        Text="4"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="4" />
+
+                <Button Grid.Row="1" Grid.Column="1"
+                        Text="5"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="5" />
+
+                <Button Grid.Row="1" Grid.Column="2"
+                        Text="6"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="6" />
+
+                <!-- 3 строка -->
+                <Button Grid.Row="2" Grid.Column="0"
+                        Text="7"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="7" />
+
+                <Button Grid.Row="2" Grid.Column="1"
+                        Text="8"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="8" />
+
+                <Button Grid.Row="2" Grid.Column="2"
+                        Text="9"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="9" />
+
+                <!-- 4 строка -->
+                <Button Grid.Row="3" Grid.Column="0"
+                        Text="⌫"
+                        Command="{Binding BackspaceCommand}" />
+
+                <Button Grid.Row="3" Grid.Column="1"
+                        Text="0"
+                        Command="{Binding AddDigitCommand}"
+                        CommandParameter="0" />
+
+                <Button Grid.Row="3" Grid.Column="2"
+                        Text="C"
+                        Command="{Binding ClearCommand}" />
+
+                <!-- 5 строка: одна большая кнопка на 3 колонки -->
+                <Button Grid.Row="4"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Text="Проверить"
+                        Command="{Binding CheckGuessCommand}" />
+
+            </Grid>
+
+            <Image
+                Source="dotnet_bot.png"
+                IsVisible="False"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a submarine number ten" />
+
+            <Label
+                Text="Hello, World!"
+                IsVisible="False"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="Welcome to &#10;.NET Multi-platform App UI"
+                IsVisible="False"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me" 
+                IsVisible="False"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,12 +1,17 @@
-﻿namespace BullsAndCows.UI;
+﻿using System.Windows.Input;
+using BullsAndCows.UI.ViewModels;
 
-public partial class MainPage : ContentPage
+namespace BullsAndCows.UI.Views;
+
+public partial class GamePage : ContentPage
 {
     int count = 0;
 
-    public MainPage()
+    public GamePage()
     {
         InitializeComponent();
+
+        BindingContext = new GamePageViewModel(); ;
     }
 
     private void OnCounterClicked(object? sender, EventArgs e)
@@ -20,18 +25,21 @@ public partial class MainPage : ContentPage
 
         SemanticScreenReader.Announce(CounterBtn.Text);
     }
-    private void OnNewGameClicked(object sender, EventArgs e)
+    private void OnNewGameClicked(object? sender, EventArgs e)
     {
         // Implementation for new game clicked
     }
 
-    private void OnExitClicked(object sender, EventArgs e)
+    private void OnExitClicked(object? sender, EventArgs e)
     {
         // Implementation for exit clicked
     }
 
-    private void OnRulesClicked(object sender, EventArgs e)
+    private void OnRulesClicked(object? sender, EventArgs e)
     {
         // Implementation for exit clicked
     }
+
+
+    
 }
