@@ -19,7 +19,7 @@ public class GameSession
     public bool IsFinished => Status != GameStatus.Finished;
     public GameSession(SecretCode secretCode)
     {
-        
+
     }
 
     public GameSession(
@@ -27,20 +27,20 @@ public class GameSession
         GameSettings settings,
         GuessEvaluator guessEvaluator)
     {
-
+        SecretCode = secretCode;
+        _guessEvaluator = guessEvaluator;
     }
 
     public GuessResult MakeGuess(Guess guess)
     {
         var result = _guessEvaluator.Evaluate(SecretCode, guess);
 
-        var historyItem = new GuessHistoryItem(
+        _history.Add(new GuessHistoryItem(
             _history.Count + 1,
             guess,
             result,
-            DateTime.UtcNow);
-
-        _history.Add(historyItem);
+            DateTime.Now)
+        );
 
         return result;
     }

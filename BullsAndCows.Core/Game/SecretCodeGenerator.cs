@@ -5,7 +5,16 @@ namespace BullsAndCows.Core.Game;
 
 public class SecretCodeGenerator
 {
-    private const int _codeLength = 4;
+    private readonly int _codeLength = 4;
+
+    public SecretCodeGenerator() { }
+
+    public SecretCodeGenerator(int codeLength)
+    {
+        if (codeLength < 1 || codeLength > 10)
+            throw new ArgumentOutOfRangeException(nameof(codeLength), "Code length must be between 1 and 10.");
+        _codeLength = codeLength;
+    }
     public SecretCode Generate()
     {
         var digits = Enumerable.Range(0, 10).Select(i => (byte)i).ToList();
