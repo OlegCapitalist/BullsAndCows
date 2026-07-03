@@ -4,10 +4,10 @@
              x:Class="BullsAndCows.UI.Views.Controls.GuessInputView">
 
     <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
-      ColumnDefinitions="*, *, *"
-      RowSpacing="8"
-      ColumnSpacing="8"
-      Padding="0,8,0,16" >
+          ColumnDefinitions="*, *, *"
+          RowSpacing="8"
+          ColumnSpacing="8"
+          Padding="0,8,0,16" >
 
         <Editor Grid.Row="0" Grid.Column="0"
                 Grid.ColumnSpan="3"
