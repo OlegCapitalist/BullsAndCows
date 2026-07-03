@@ -1,30 +1,34 @@
-﻿using System.Windows.Input;
-using BullsAndCows.UI.ViewModels;
+﻿using BullsAndCows.UI.ViewModels;
 
 namespace BullsAndCows.UI.Views;
 
 public partial class GamePage : ContentPage
 {
-    int count = 0;
-
     public GamePage()
     {
         InitializeComponent();
 
-        BindingContext = new GamePageViewModel(); ;
+        BindingContext = new GamePageViewModel();
     }
 
-    private void OnCounterClicked(object? sender, EventArgs e)
+    protected void OnOrientationChanged(object? sender, EventArgs e)
     {
-        count++;
+        bool isLandscape = (Width > Height);
 
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
+        PortraitLayout.IsVisible = !isLandscape;
+        LandscapeLayout.IsVisible = isLandscape;
     }
+
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+
+        bool isLandscape = (Width > Height);
+
+        PortraitLayout.IsVisible = !isLandscape;
+        LandscapeLayout.IsVisible = isLandscape;
+    }
+
     private void OnNewGameClicked(object? sender, EventArgs e)
     {
         // Implementation for new game clicked

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BullsAndCows.UI.Views.Controls.GuessInputView">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+      ColumnDefinitions="*, *, *"
+      RowSpacing="8"
+      ColumnSpacing="8"
+      Padding="0,8,0,16" >
+
+        <Editor Grid.Row="0" Grid.Column="0"
+                Grid.ColumnSpan="3"
+                IsReadOnly="True" 
+                Text="{Binding SecretNumber}" />
+
+        <!-- 1 строка -->
+        <Button Grid.Row="1" Grid.Column="0"
+                Text="1"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="1" />
+
+        <Button Grid.Row="1" Grid.Column="1"
+                Text="2"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="2" />
+
+        <Button Grid.Row="1" Grid.Column="2"
+                Text="3"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="3" />
+
+        <!-- 2 строка -->
+        <Button Grid.Row="2" Grid.Column="0"
+                Text="4"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="4" />
+
+        <Button Grid.Row="2" Grid.Column="1"
+                Text="5"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="5" />
+
+        <Button Grid.Row="2" Grid.Column="2"
+                Text="6"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="6" />
+
+        <!-- 3 строка -->
+        <Button Grid.Row="3" Grid.Column="0"
+                Text="7"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="7" />
+
+        <Button Grid.Row="3" Grid.Column="1"
+                Text="8"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="8" />
+
+        <Button Grid.Row="3" Grid.Column="2"
+                Text="9"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="9" />
+
+        <!-- 4 строка -->
+        <Button Grid.Row="4" Grid.Column="0"
+                Text="⌫"
+                Command="{Binding BackspaceCommand}" />
+
+        <Button Grid.Row="4" Grid.Column="1"
+                Text="0"
+                Command="{Binding AddDigitCommand}"
+                CommandParameter="0" />
+
+        <Button Grid.Row="4" Grid.Column="2"
+                Text="C"
+                Command="{Binding ClearCommand}" />
+
+        <!-- 5 строка: одна большая кнопка на 3 колонки -->
+        <Button Grid.Row="5" Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Text="Проверить"
+                Command="{Binding CheckGuessCommand}" />
+
+    </Grid>
+
+</ContentView>
