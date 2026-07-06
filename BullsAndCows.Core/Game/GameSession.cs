@@ -5,8 +5,9 @@ namespace BullsAndCows.Core.Game;
 
 public class GameSession
 {
-    private readonly GuessEvaluator _guessEvaluator = new();
+    private readonly GuessEvaluator _guessEvaluator;
     private readonly List<GuessHistoryItem> _history = [];
+    private readonly GameSettings _settings;
 
     public SecretCode SecretCode { get; }
 
@@ -16,10 +17,15 @@ public class GameSession
 
     public int AttemptsCount => _history.Count;
 
-    public bool IsFinished => Status != GameStatus.Finished;
+    public bool IsFinished => Status is GameStatus.Won
+                                or GameStatus.Lost
+                                or GameStatus.GaveUp;
+
     public GameSession(SecretCode secretCode)
     {
-
+        SecretCode = secretCode;
+        _guessEvaluator = new();
+        _settings = new GameSettings(4, 10);
     }
 
     public GameSession(
@@ -29,6 +35,7 @@ public class GameSession
     {
         SecretCode = secretCode;
         _guessEvaluator = guessEvaluator;
+        _settings = settings;
     }
 
     public GuessResult MakeGuess(Guess guess)
@@ -42,15 +49,24 @@ public class GameSession
             DateTime.Now)
         );
 
+        if (result.IsCorrect)
+        {
+            Status = GameStatus.Won;
+        }
+        else if (_history.Count >= _settings.MaxAttempts)
+        {
+            Status = GameStatus.Lost;
+        }
+
         return result;
     }
 
     public void GiveUp()
     {
-        if (Status != GameStatus.Started)
+        if (Status != GameStatus.InProgress)
             return;
 
-        Status = GameStatus.Finished;
+        Status = GameStatus.GaveUp;
     }
 
 }
