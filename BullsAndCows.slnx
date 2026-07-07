@@ -3,14 +3,11 @@
     <File Path="scheme.txt" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="BullsAndCows.Application/BullsAndCows.Application.csproj" />
+    <Project Path="BullsAndCows.Core/BullsAndCows.Core.csproj" />
+    <Project Path="BullsAndCows.Infrastructure/BullsAndCows.Infrastructure.csproj" Id="c2a81f3e-12ad-40e8-b48f-269bb1dce285" />
     <Project Path="BullsAndCows.UI/BullsAndCows.UI.csproj" Id="4b312ef1-5ad9-4902-b392-b056bfb2ac36">
       <Deploy Solution="Debug|*" />
     </Project>
-  </Folder>
-  <Folder Name="/src/Application/">
-    <Project Path="BullsAndCows.Application/BullsAndCows.Application.csproj" />
-  </Folder>
-  <Folder Name="/src/Core/">
-    <Project Path="BullsAndCows.Core/BullsAndCows.Core.csproj" />
   </Folder>
 </Solution>
