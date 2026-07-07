@@ -1,6 +1,10 @@
-﻿using PropertyChanged;
+﻿using BullsAndCows.Application.Interfaces;
+using BullsAndCows.Application.Services;
+using BullsAndCows.UI.Models;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 
@@ -9,7 +13,10 @@ namespace BullsAndCows.UI.ViewModels;
 [AddINotifyPropertyChangedInterface]
 public class GamePageViewModel 
 {
-    public string SecretNumber { get; set; } = "";
+    private IGameAppService _gameAppService = null!;
+    public string Guess { get; set; } = "";
+
+    public ObservableCollection<Attempt> Attempts { get; set; } = new();
 
     public ICommand AddDigitCommand => new Command<string>(AddDigit);
 
@@ -19,34 +26,39 @@ public class GamePageViewModel
 
     public ICommand CheckGuessCommand => new Command(CheckGuess);
 
-    public GamePageViewModel()
+    public GamePageViewModel(IGameAppService gameAppService)
     {
-
+        _gameAppService = gameAppService;
     }
 
     private void AddDigit(string num)
     {
-        if (string.IsNullOrEmpty(num) || SecretNumber.Length >= 4)
+        if (string.IsNullOrEmpty(num) || Guess.Length >= 4)
             return;
 
-        SecretNumber += num;
+        Guess += num;
     }
 
     private void Backspace()
     {
-        if (SecretNumber.Length > 0)
+        if (Guess.Length > 0)
         {
-            SecretNumber = SecretNumber.Substring(0, SecretNumber.Length - 1);
+            Guess = Guess.Substring(0, Guess.Length - 1);
         }
     }
 
     private void Clear()
     {
-        SecretNumber = "";
+        Guess = "";
     }
 
     private void CheckGuess()
     {
-        // Implementation for checking the guess
+        if (string.IsNullOrEmpty(Guess))
+            return;
+
+        _gameAppService.MakeGuess(Guess);
+        Attempts.Add(new Attempt(Attempts.Count+1, Guess, 1, 1, DateTime.Now));
+        Guess = "";
     }
 }

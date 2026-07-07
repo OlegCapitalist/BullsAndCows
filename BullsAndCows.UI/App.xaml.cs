@@ -2,7 +2,7 @@
 
 namespace BullsAndCows.UI;
 
-public partial class App : Application
+public partial class App : MauiApplication
 {
     public App()
     {

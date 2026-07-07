@@ -3,8 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BullsAndCows.UI.Views.Controls.AttemptsHistoryView">
 
-    <Grid>
-        <Label Text="История попыток" />
-    </Grid>
+    <CollectionView ItemsSource="{Binding Attempts}"
+                        VerticalScrollBarVisibility="Default">
+
+        <CollectionView.EmptyView>
+            <Label Text="Попыток пока нет"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Opacity="0.6" />
+        </CollectionView.EmptyView>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid ColumnDefinitions="Auto, *, Auto, Auto"
+                      Padding="8"
+                      ColumnSpacing="12">
+
+                    <Label Grid.Column="0"
+                           Text="{Binding AttemptNumber}"
+                           FontSize="18" />
+                    
+                    <Label Grid.Column="1"
+                           Text="{Binding Guess}"
+                           FontSize="20"
+                           FontAttributes="Bold" />
+
+                    <Label Grid.Column="2"
+                           Text="{Binding Bulls, StringFormat='🐂 {0}'}"
+                           FontSize="18" />
+
+                    <Label Grid.Column="3"
+                           Text="{Binding Cows, StringFormat='🐄 {0}'}"
+                           FontSize="18" />
+
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
 
 </ContentView>
