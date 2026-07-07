@@ -1,5 +1,8 @@
-﻿namespace BullsAndCows.Application.DTOs;
+﻿using BullsAndCows.Core.Enums;
 
-public record GuessResultDto
+namespace BullsAndCows.Application.DTOs;
+
+public record GuessResultDto(int AttemptNumber, string Guess, int Bulls, int Cows, GameStatus Status)
 {
+    public bool IsWin => Status == GameStatus.Won;
 }

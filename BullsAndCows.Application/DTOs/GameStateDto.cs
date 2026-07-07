@@ -1,5 +1,8 @@
-﻿namespace BullsAndCows.Application.DTOs;
+﻿using BullsAndCows.Core.Enums;
 
-public record GameStateDto
+namespace BullsAndCows.Application.DTOs;
+
+public record GameStateDto(GameStatus Status, int CodeLength, int AttemptsCount)
 {
+    public bool IsFinished => Status != GameStatus.InProgress;
 }

@@ -1,9 +1,10 @@
 ﻿using BullsAndCows.Core.Enums;
+using BullsAndCows.Core.Interfaces;
 using BullsAndCows.Core.Models;
 
 namespace BullsAndCows.Core.Game;
 
-public class GameSession
+public class GameSession : IGameSession
 {
     private readonly GuessEvaluator _guessEvaluator;
     private readonly List<GuessHistoryItem> _history = [];

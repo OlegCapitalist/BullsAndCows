@@ -1,9 +1,9 @@
-﻿using BullsAndCows.Core.Models;
-using System.Text;
+﻿using BullsAndCows.Core.Interfaces;
+using BullsAndCows.Core.Models;
 
 namespace BullsAndCows.Core.Game;
 
-public class SecretCodeGenerator
+public class SecretCodeGenerator : ISecretCodeGenerator
 {
     private readonly int _codeLength = 4;
 
