@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-using BullsAndCows.Application.Interfaces;
+﻿using BullsAndCows.Application.Interfaces;
+using BullsAndCows.Application.Services;
+using BullsAndCows.UI.ViewModels;
+using BullsAndCows.UI.Views;
+using Microsoft.Extensions.Logging;
 
 namespace BullsAndCows.UI;
 
@@ -17,6 +20,9 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<IGameAppService, GameAppService>();
+
+        builder.Services.AddTransient<GamePageViewModel>();
+        builder.Services.AddTransient<GamePage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
