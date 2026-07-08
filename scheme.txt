@@ -68,15 +68,17 @@ BullsAndCows/
 │   ├── BullsAndCows.Application/
 │   │   ├── Services/
 │   │   │   ├── GameAppService.cs
-│   │   │   ├── StatisticsService.cs
+│   │   │   ├── SettingsStorage.cs
 │   │   │   └── SettingsService.cs
 │   │   │
 │   │   ├── Abstractions/
 │   │   │   ├── IGameAppService.cs
-│   │   │   ├── IStatisticsService.cs
+│   │   │   ├── ISettingsStorage.cs
 │   │   │   └── ISettingsService.cs
 │   │   │
 │   │   ├── Dtos/
+│   │   │   ├── AppSettingsDto.cs
+│   │   │   ├── GameStateDto.cs
 │   │   │   ├── StartGameRequest.cs
 │   │   │   ├── MakeGuessRequest.cs
 │   │   │   ├── GuessResultDto.cs
