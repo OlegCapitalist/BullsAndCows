@@ -1,5 +1,4 @@
-﻿using BullsAndCows.Application.Interfaces;
-using BullsAndCows.Application.Services;
+﻿using BullsAndCows.Application.Extensions;
 using BullsAndCows.UI.ViewModels;
 using BullsAndCows.UI.Views;
 using Microsoft.Extensions.Logging;
@@ -19,7 +18,8 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        builder.Services.AddSingleton<IGameAppService, GameAppService>();
+        //builder.Services.AddSingleton<IGameAppService, GameAppService>();
+        builder.Services.AddApplication();
 
         builder.Services.AddTransient<GamePageViewModel>();
         builder.Services.AddTransient<GamePage>();
