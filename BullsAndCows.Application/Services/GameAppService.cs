@@ -2,16 +2,17 @@
 using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Core.Game;
 using BullsAndCows.Core.Models;
+using BullsAndCows.Core.Interfaces;
 
 namespace BullsAndCows.Application.Services;
 
 public class GameAppService : IGameAppService
 {
-    private readonly GameEngine _gameEngine;
+    private readonly IGameEngine _gameEngine;
 
-    private GameSession? _currentSession;
+    private IGameSession _currentSession = null!;
 
-    public GameAppService(GameEngine gameEngine)
+    public GameAppService(IGameEngine gameEngine)
     {
         _gameEngine = gameEngine;
     }
@@ -65,7 +66,7 @@ public class GameAppService : IGameAppService
 
         return MapToGameStateDto(_currentSession);
     }
-    private static GameStateDto MapToGameStateDto(GameSession session)
+    private static GameStateDto MapToGameStateDto(IGameSession session)
     {
         return new GameStateDto(
             session.Status,
