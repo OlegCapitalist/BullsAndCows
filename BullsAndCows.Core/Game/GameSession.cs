@@ -6,7 +6,7 @@ namespace BullsAndCows.Core.Game;
 
 public class GameSession : IGameSession
 {
-    private readonly GuessEvaluator _guessEvaluator;
+    private readonly IGuessEvaluator _guessEvaluator;
     private readonly List<GuessHistoryItem> _history = [];
     private readonly GameSettings _settings;
 
@@ -25,14 +25,14 @@ public class GameSession : IGameSession
     public GameSession(SecretCode secretCode)
     {
         SecretCode = secretCode;
-        _guessEvaluator = new();
+        _guessEvaluator = new GuessEvaluator();
         _settings = new GameSettings(4, 10);
     }
 
     public GameSession(
         SecretCode secretCode,
         GameSettings settings,
-        GuessEvaluator guessEvaluator)
+        IGuessEvaluator guessEvaluator)
     {
         SecretCode = secretCode;
         _guessEvaluator = guessEvaluator;
