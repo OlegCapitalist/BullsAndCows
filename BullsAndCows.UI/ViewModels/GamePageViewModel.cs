@@ -1,5 +1,4 @@
 ﻿using BullsAndCows.Application.Interfaces;
-using BullsAndCows.Application.Services;
 using BullsAndCows.UI.Models;
 using PropertyChanged;
 using System;
@@ -7,6 +6,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using BullsAndCows.Application.DTOs;
+
 
 namespace BullsAndCows.UI.ViewModels;
 
@@ -29,6 +30,7 @@ public class GamePageViewModel
     public GamePageViewModel(IGameAppService gameAppService)
     {
         _gameAppService = gameAppService;
+        _gameAppService.StartGame(new StartGameRequest(4, 10));
     }
 
     private void AddDigit(string num)
@@ -57,8 +59,8 @@ public class GamePageViewModel
         if (string.IsNullOrEmpty(Guess))
             return;
 
-        _gameAppService.MakeGuess(Guess);
-        Attempts.Add(new Attempt(Attempts.Count+1, Guess, 1, 1, DateTime.Now));
+        var result = _gameAppService.MakeGuess(new MakeGuessRequest(Guess));
+        Attempts.Add(new Attempt(Attempts.Count + 1, Guess, result.Bulls, result.Cows, DateTime.Now));
         Guess = "";
     }
 }
