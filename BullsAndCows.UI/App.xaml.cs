@@ -13,8 +13,6 @@ public partial class App : MauiApplication
     {
         return new Window(new AppShell())
         {
-            Title = "Bulls and Cows",
-
             Width = 390,
             Height = 844,
 

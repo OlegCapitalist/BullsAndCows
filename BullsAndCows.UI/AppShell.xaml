@@ -8,7 +8,18 @@
 
     <ShellContent
         Title="Bulls and Cows"
-        ContentTemplate="{DataTemplate views:GamePage}"
-        Route="GamePage" />
+        ContentTemplate="{DataTemplate views:HomePage}"
+        Route="HomePage" />
 
+    <ShellContent
+        Route="GamePage"
+        ContentTemplate="{DataTemplate views:GamePage}" />
+
+    <ShellContent
+        Route="HelpPage"
+        ContentTemplate="{DataTemplate views:HelpPage}" />
+
+    <ShellContent
+        Route="SettingsPage"
+        ContentTemplate="{DataTemplate views:SettingsPage}" />
 </Shell>

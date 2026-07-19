@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BullsAndCows.UI.Views.HelpPage">
+             x:Class="BullsAndCows.UI.Views.HelpPage"
+             Title="Справка">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Игра из себя представляет головоломку"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button 
+            Text="Назад" 
+            Clicked="OnBackClicked"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>
-</ContentView>
+</ContentPage>
