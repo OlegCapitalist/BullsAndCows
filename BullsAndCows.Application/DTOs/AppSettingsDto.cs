@@ -2,4 +2,6 @@
 
 public record AppSettingsDto(
     int CodeLength,
-    int MaxAttempts);
+    int MaxAttempts,
+    string theme,
+    string language);

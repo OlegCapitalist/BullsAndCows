@@ -6,7 +6,7 @@ namespace BullsAndCows.Application.Interfaces;
 
 public interface ISettingsStorage
 {
-    Task<AppSettingsDto?> LoadAsync(CancellationToken cancellationToken = default);
+    Task<AppSettingsDto> LoadAsync(CancellationToken cancellationToken = default);
 
     Task SaveAsync(AppSettingsDto settings, CancellationToken cancellationToken = default);
 }
