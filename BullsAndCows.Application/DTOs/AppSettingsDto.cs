@@ -3,5 +3,5 @@
 public record AppSettingsDto(
     int CodeLength,
     int MaxAttempts,
-    string theme,
-    string language);
+    string Theme,
+    string Language);

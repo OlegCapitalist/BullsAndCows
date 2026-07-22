@@ -31,7 +31,7 @@ public class SettingsService : ISettingsService
 
     public AppSettingsDto GetDefaultSettings()
     {
-        return new AppSettingsDto(4, 10);
+        return new AppSettingsDto(4, 10, "System", "ru");
     }
 
     private static void Validate(AppSettingsDto settings)
