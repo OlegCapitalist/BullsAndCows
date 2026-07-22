@@ -28,8 +28,7 @@ public class JsonSettingsStorage : ISettingsStorage
     public async Task<AppSettingsDto> LoadAsync(
         CancellationToken cancellationToken = default)
     {
-        if (!File.Exists(_filePath))
-            return null;
+        await EnsureCreatedAsync(cancellationToken);
 
         await using (var stream = new FileStream(
             _filePath,

@@ -1,7 +1,10 @@
 ﻿using BullsAndCows.Application.Extensions;
+using BullsAndCows.Application.Interfaces;
+using BullsAndCows.Infrastructure.Storage;
 using BullsAndCows.UI.ViewModels;
 using BullsAndCows.UI.Views;
 using Microsoft.Extensions.Logging;
+
 
 namespace BullsAndCows.UI;
 
@@ -18,11 +21,23 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        //builder.Services.AddSingleton<IGameAppService, GameAppService>();
         builder.Services.AddApplication();
+
+        var settingsFilePath = Path.Combine(
+            FileSystem.AppDataDirectory,
+            "appsettings.json");
+
+        builder.Services.AddSingleton<ISettingsStorage>(
+            new JsonSettingsStorage(
+                settingsFilePath,
+                _ => FileSystem.OpenAppPackageFileAsync("appsettings.json")));
+
 
         builder.Services.AddTransient<GamePageViewModel>();
         builder.Services.AddTransient<GamePage>();
+
+        builder.Services.AddTransient<SettingsPageViewModel>();
+        builder.Services.AddTransient<SettingsPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

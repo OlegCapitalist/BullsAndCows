@@ -78,6 +78,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\BullsAndCows.Application\BullsAndCows.Application.csproj" />
+	  <ProjectReference Include="..\BullsAndCows.Infrastructure\BullsAndCows.Infrastructure.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
