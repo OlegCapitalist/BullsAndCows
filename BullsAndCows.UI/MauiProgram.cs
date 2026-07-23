@@ -1,5 +1,6 @@
 ﻿using BullsAndCows.Application.Extensions;
 using BullsAndCows.Application.Interfaces;
+using BullsAndCows.Application.Services;
 using BullsAndCows.Infrastructure.Storage;
 using BullsAndCows.UI.ViewModels;
 using BullsAndCows.UI.Views;
@@ -32,6 +33,7 @@ public static class MauiProgram
                 settingsFilePath,
                 _ => FileSystem.OpenAppPackageFileAsync("appsettings.json")));
 
+        builder.Services.AddSingleton<ISettingsService, SettingsService>();
 
         builder.Services.AddTransient<GamePageViewModel>();
         builder.Services.AddTransient<GamePage>();

@@ -8,7 +8,7 @@
               RowSpacing="12"
               ColumnSpacing="16"
               ColumnDefinitions="Auto,*"
-              RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
 
             <Label Grid.Row="0" Grid.Column="0"
                    Text="Длина кода"
@@ -41,7 +41,17 @@
             <Picker Grid.Row="3" Grid.Column="1"
                     ItemsSource="{Binding AvailableLanguages}"
                     SelectedItem="{Binding Language}"
-                    HorizontalOptions="Fill" />         
+                    HorizontalOptions="Fill" />
+            
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                    Text="Сохранить"
+                    Command="{Binding SaveSettingsCommand}"
+                    HorizontalOptions="Center" />
+            
+            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                    Text="Назад"
+                    Clicked="OnBackClicked"
+                    HorizontalOptions="Center" />
         </Grid>
     </Grid>
 </ContentPage>
