@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace BullsAndCows.UI.Models;
 
-namespace BullsAndCows.UI.Models;
-
-internal enum Themes
+public enum Themes
 {
     System,
     Light,
