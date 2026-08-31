@@ -4,11 +4,21 @@ namespace BullsAndCows.UI.Views;
 
 public partial class SettingsPage : ContentPage
 {
-	public SettingsPage(SettingsPageViewModel viewModel)
+    private SettingsPageViewModel ViewModel =>
+        (SettingsPageViewModel)BindingContext;
+
+    public SettingsPage(SettingsPageViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await ViewModel.LoadSettingsAsync();
+    }
 
     private async void OnBackClicked(object sender, EventArgs e)
     {
