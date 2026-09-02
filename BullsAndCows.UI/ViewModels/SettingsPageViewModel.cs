@@ -35,7 +35,7 @@ public class SettingsPageViewModel
         _settingsService = settingsService;
 
         SaveSettingsCommand = new Command(async () => await SaveSettingsAsync());
-    }
+    }   
 
     public async Task LoadSettingsAsync()
     {

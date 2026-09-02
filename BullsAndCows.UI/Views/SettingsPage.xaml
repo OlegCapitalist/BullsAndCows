@@ -40,7 +40,8 @@
                    VerticalOptions="Center" />
             <Picker Grid.Row="3" Grid.Column="1"
                     ItemsSource="{Binding AvailableLanguages}"
-                    SelectedItem="{Binding Language}"
+                    ItemDisplayBinding="{Binding DisplayName}"
+                    SelectedIndex ="{Binding SelectedLanguageIndex}"
                     HorizontalOptions="Fill" />
             
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
