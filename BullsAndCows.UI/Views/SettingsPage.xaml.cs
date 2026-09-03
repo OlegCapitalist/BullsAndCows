@@ -24,4 +24,5 @@ public partial class SettingsPage : ContentPage
     {
         await Shell.Current.GoToAsync("//HomePage");
     }
+
 }
