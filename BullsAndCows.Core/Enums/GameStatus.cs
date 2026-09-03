@@ -3,10 +3,7 @@
 public enum GameStatus
 {
     NotStarted,
-    Started,
     InProgress,
-    Stopping,
-    Finished,
     Won,
     Lost,
     GaveUp
