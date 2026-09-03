@@ -4,11 +4,21 @@ namespace BullsAndCows.UI.Views;
 
 public partial class GamePage : ContentPage
 {
+    private GamePageViewModel ViewModel =>
+        (GamePageViewModel)BindingContext;
+
     public GamePage(GamePageViewModel viewModel)
     {
         InitializeComponent();
 
         BindingContext = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await ViewModel.StartGameAsync();
     }
 
     protected void OnOrientationChanged(object? sender, EventArgs e)

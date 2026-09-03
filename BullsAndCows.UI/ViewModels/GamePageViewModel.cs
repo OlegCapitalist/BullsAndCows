@@ -1,10 +1,7 @@
 ﻿using BullsAndCows.Application.Interfaces;
 using BullsAndCows.UI.Models;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using BullsAndCows.Application.DTOs;
 
@@ -14,7 +11,9 @@ namespace BullsAndCows.UI.ViewModels;
 [AddINotifyPropertyChangedInterface]
 public class GamePageViewModel 
 {
-    private IGameAppService _gameAppService = null!;
+    private readonly IGameAppService _gameAppService = null!;
+    private readonly ISettingsService _settingsService = null!;
+
     public string Guess { get; set; } = "";
 
     public ObservableCollection<Attempt> Attempts { get; set; } = new();
@@ -27,10 +26,20 @@ public class GamePageViewModel
 
     public ICommand CheckGuessCommand => new Command(CheckGuess);
 
-    public GamePageViewModel(IGameAppService gameAppService)
+    public GamePageViewModel(IGameAppService gameAppService, ISettingsService settingsService)
     {
         _gameAppService = gameAppService;
-        _gameAppService.StartGame(new StartGameRequest(4, 10));
+        _settingsService = settingsService;
+    }
+
+    public async Task StartGameAsync()
+    {
+        var settings = await _settingsService.GetSettingsAsync();
+
+        _gameAppService.StartGame(
+            new StartGameRequest(
+                settings.CodeLength,
+                settings.MaxAttempts));
     }
 
     private void AddDigit(string num)
@@ -63,4 +72,6 @@ public class GamePageViewModel
         Attempts.Add(new Attempt(Attempts.Count + 1, Guess, result.Bulls, result.Cows, DateTime.Now));
         Guess = "";
     }
+
+
 }

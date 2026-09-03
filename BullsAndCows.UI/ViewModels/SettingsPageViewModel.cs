@@ -12,17 +12,48 @@ public class SettingsPageViewModel
 {
     private readonly ISettingsService _settingsService = null!;
 
+    private readonly Dictionary<string, string> localizationMock = new()
+    {
+        { "Language_English", "English" },
+        { "Language_Russian", "Русский" },
+        { "Language_QazaqCyrillic", "Қазақша" },
+        { "Language_QazaqLatin", "Qazaqşa" },
+        { "Theme_System", "Системная" },
+        { "Theme_Light", "Светлая" },
+        { "Theme_Dark", "Темная" }
+    };
+
     public int CodeLength { get; set; } = 4;
 
     public int MaxAttempts { get; set; } = 10;
 
-    public int SelectedThemeIndex { get; set; } = 0;
+    public int SelectedThemeIndex
+    { 
+        get => Array.IndexOf(Enum.GetValues(typeof(Themes)), SelectedTheme);
+        set
+        {
+            var values = Enum.GetValues<Themes>();
 
-    public int SelectedLanguageIndex { get; set; } = 0;
+            if (value >= 0 && value < values.Length)
+                SelectedTheme = values[value];
+        }
+    }
 
-    public IReadOnlyList<Themes> AvailableThemes { get; } = Enum.GetValues<Themes>();
+    public int SelectedLanguageIndex
+    {
+        get => Array.IndexOf(Enum.GetValues(typeof(Languages)), SelectedLanguage);
+        set
+        {
+            var values = Enum.GetValues<Languages>();
 
-    public IReadOnlyList<Languages> AvailableLanguages { get; } = Enum.GetValues<Languages>();
+            if (value >= 0 && value < values.Length)
+                SelectedLanguage = values[value];
+        }
+    }
+
+    public IReadOnlyList<SelectionItem<Themes>> AvailableThemes { get; }
+
+    public IReadOnlyList<SelectionItem<Languages>> AvailableLanguages { get; } 
 
     public Themes SelectedTheme { get; set; }
 
@@ -35,6 +66,19 @@ public class SettingsPageViewModel
         _settingsService = settingsService;
 
         SaveSettingsCommand = new Command(async () => await SaveSettingsAsync());
+
+        AvailableLanguages = [
+            new(Languages.English, localizationMock["Language_English"]),
+            new(Languages.Russian, localizationMock["Language_Russian"]),
+            new(Languages.QazaqCyrillic, localizationMock["Language_QazaqCyrillic"]),
+            new(Languages.QazaqLatin, localizationMock["Language_QazaqLatin"])
+        ];
+
+        AvailableThemes = [
+            new(Themes.System, localizationMock["Theme_System"]),
+            new(Themes.Light, localizationMock["Theme_Light"]),
+            new(Themes.Dark, localizationMock["Theme_Dark"])
+        ];
     }   
 
     public async Task LoadSettingsAsync()

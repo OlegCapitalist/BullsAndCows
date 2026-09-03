@@ -32,7 +32,8 @@
                    VerticalOptions="Center" />
             <Picker Grid.Row="2" Grid.Column="1"
                     ItemsSource="{Binding AvailableThemes}"
-                    SelectedItem="{Binding Theme}"
+                    ItemDisplayBinding="{Binding DisplayName}"
+                    SelectedIndex="{Binding SelectedThemeIndex}"
                     HorizontalOptions="Fill" />
 
             <Label Grid.Row="3" Grid.Column="0"
@@ -47,12 +48,12 @@
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                     Text="Сохранить"
                     Command="{Binding SaveSettingsCommand}"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="Fill" />
             
             <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                     Text="Назад"
                     Clicked="OnBackClicked"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="Fill" />
         </Grid>
     </Grid>
 </ContentPage>
