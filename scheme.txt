@@ -81,8 +81,7 @@ BullsAndCows/
 │   │   │   ├── GameStateDto.cs
 │   │   │   ├── StartGameRequest.cs
 │   │   │   ├── MakeGuessRequest.cs
-│   │   │   ├── GuessResultDto.cs
-│   │   │   └── GameStateDto.cs
+│   │   │   └─ GuessResultDto.cs
 │   │   │
 │   │   └── BullsAndCows.Application.csproj
 │   │
