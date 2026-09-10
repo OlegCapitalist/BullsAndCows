@@ -16,7 +16,15 @@ public class GamePageViewModel
 
     public string Guess { get; set; } = "";
 
+    public GameStatusDto Status { get; set; } = GameStatusDto.NotStarted;
+
+    public bool CanMakeGuess => Status == GameStatusDto.InProgress;
+    public bool IsWon => Status == GameStatusDto.Won;
+    public bool IsLost => Status == GameStatusDto.Lost;
+
     public ObservableCollection<Attempt> Attempts { get; set; } = new();
+
+    #region Commands
 
     public ICommand AddDigitCommand => new Command<string>(AddDigit);
 
@@ -25,6 +33,8 @@ public class GamePageViewModel
     public ICommand ClearCommand => new Command(Clear);
 
     public ICommand CheckGuessCommand => new Command(CheckGuess);
+
+    #endregion
 
     public GamePageViewModel(IGameAppService gameAppService, ISettingsService settingsService)
     {
@@ -36,10 +46,12 @@ public class GamePageViewModel
     {
         var settings = await _settingsService.GetSettingsAsync();
 
-        _gameAppService.StartGame(
+        var result = _gameAppService.StartGame(
             new StartGameRequest(
                 settings.CodeLength,
                 settings.MaxAttempts));
+
+        Status = result.Status;
     }
 
     private void AddDigit(string num)
@@ -68,8 +80,14 @@ public class GamePageViewModel
         if (string.IsNullOrEmpty(Guess))
             return;
 
+        if (Status != GameStatusDto.InProgress)
+            return;
+
         var result = _gameAppService.MakeGuess(new MakeGuessRequest(Guess));
         Attempts.Add(new Attempt(Attempts.Count + 1, Guess, result.Bulls, result.Cows, DateTime.Now));
+
+        Status = result.Status;
+
         Guess = "";
     }
 
