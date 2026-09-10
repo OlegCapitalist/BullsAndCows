@@ -3,6 +3,7 @@ using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Core.Game;
 using BullsAndCows.Core.Models;
 using BullsAndCows.Core.Interfaces;
+using BullsAndCows.Core.Enums;
 
 namespace BullsAndCows.Application.Services;
 
@@ -25,7 +26,7 @@ public class GameAppService : IGameAppService
 
         _currentSession = _gameEngine.StartNewGame(settings);
 
-        return MapToGameStateDto(_currentSession);
+        return MapGameSessionToGameStateDto(_currentSession);
     }
 
     public GuessResultDto MakeGuess(MakeGuessRequest request)
@@ -46,7 +47,7 @@ public class GameAppService : IGameAppService
             request.Value,
             result.Bulls,
             result.Cows,
-            _currentSession.Status
+            MapGameStatusToGameStatusDto(_currentSession.Status)
         );
     }
     public GameStateDto GiveUp()
@@ -56,7 +57,7 @@ public class GameAppService : IGameAppService
 
         _currentSession.GiveUp();
 
-        return MapToGameStateDto(_currentSession);
+        return MapGameSessionToGameStateDto(_currentSession);
     }
 
     public GameStateDto GetState()
@@ -64,14 +65,27 @@ public class GameAppService : IGameAppService
         if (_currentSession is null)
             throw new InvalidOperationException("Game is not started.");
 
-        return MapToGameStateDto(_currentSession);
+        return MapGameSessionToGameStateDto(_currentSession);
     }
-    private static GameStateDto MapToGameStateDto(IGameSession session)
+    private static GameStateDto MapGameSessionToGameStateDto(IGameSession session)
     {
         return new GameStateDto(
-            session.Status,
+            MapGameStatusToGameStatusDto(session.Status),
             session.AttemptsCount,
             session.SecretCode.Value.Length
         );
+    }
+
+    private static GameStatusDto MapGameStatusToGameStatusDto(GameStatus status)
+    {
+        return status switch
+        {
+            GameStatus.NotStarted => GameStatusDto.NotStarted,
+            GameStatus.InProgress => GameStatusDto.InProgress,
+            GameStatus.Won => GameStatusDto.Won,
+            GameStatus.Lost => GameStatusDto.Lost,
+            GameStatus.GaveUp => GameStatusDto.GaveUp,
+            _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
+        };
     }
 }

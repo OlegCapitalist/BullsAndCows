@@ -27,6 +27,8 @@ public class GameSession : IGameSession
         SecretCode = secretCode;
         _guessEvaluator = new GuessEvaluator();
         _settings = new GameSettings(4, 10);
+
+        Status = GameStatus.InProgress;
     }
 
     public GameSession(
@@ -37,6 +39,8 @@ public class GameSession : IGameSession
         SecretCode = secretCode;
         _guessEvaluator = guessEvaluator;
         _settings = settings;
+
+        Status = GameStatus.InProgress;
     }
 
     public GuessResult MakeGuess(Guess guess)
@@ -57,6 +61,10 @@ public class GameSession : IGameSession
         else if (_history.Count >= _settings.MaxAttempts)
         {
             Status = GameStatus.Lost;
+        }
+        else
+        {
+            Status = GameStatus.InProgress;
         }
 
         return result;
