@@ -10,8 +10,11 @@ namespace BullsAndCows.Application.Services;
 public class GameAppService : IGameAppService
 {
     private readonly IGameEngine _gameEngine;
+    private string _secretCode = string.Empty;
 
     private IGameSession _currentSession = null!;
+
+    public string SecretCode {  get; private set; } = string.Empty;
 
     public GameAppService(IGameEngine gameEngine)
     {
@@ -25,6 +28,9 @@ public class GameAppService : IGameAppService
             maxAttempts: request.MaxAttempts);
 
         _currentSession = _gameEngine.StartNewGame(settings);
+
+        _secretCode = string.Concat(_currentSession.SecretCode.Value.Select(d => d.ToString()));
+        SecretCode = "";
 
         return MapGameSessionToGameStateDto(_currentSession);
     }
@@ -41,6 +47,8 @@ public class GameAppService : IGameAppService
         var guess = new Guess(digits);
 
         var result = _currentSession.MakeGuess(guess);
+
+        SecretCode = _currentSession.Status is GameStatus.Lost ? _secretCode : string.Empty;
 
         return new GuessResultDto(
             _currentSession.AttemptsCount,

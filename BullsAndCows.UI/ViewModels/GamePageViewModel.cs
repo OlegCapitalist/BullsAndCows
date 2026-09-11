@@ -14,6 +14,7 @@ public class GamePageViewModel
     private readonly IGameAppService _gameAppService = null!;
     private readonly ISettingsService _settingsService = null!;
 
+    public string SecretCode { get; set; } = "";
     public string Guess { get; set; } = "";
 
     public GameStatusDto Status { get; set; } = GameStatusDto.NotStarted;
@@ -51,6 +52,8 @@ public class GamePageViewModel
                 settings.CodeLength,
                 settings.MaxAttempts));
 
+        SecretCode = "";
+
         Status = result.Status;
     }
 
@@ -87,6 +90,7 @@ public class GamePageViewModel
         Attempts.Add(new Attempt(Attempts.Count + 1, Guess, result.Bulls, result.Cows, DateTime.Now));
 
         Status = result.Status;
+        SecretCode = Status is GameStatusDto.Lost ? _gameAppService.SecretCode : "";
 
         Guess = "";
     }

@@ -8,7 +8,7 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Label 
-            Text="Lost"
+            Text="{Binding SecretCode}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>
