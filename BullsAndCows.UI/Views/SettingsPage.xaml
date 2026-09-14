@@ -5,17 +5,25 @@
              x:Class="BullsAndCows.UI.Views.SettingsPage"
              Title="SettingsPage">
     <Grid>
+        
+        
         <Grid Padding="20"
               RowSpacing="12"
               ColumnSpacing="16"
               ColumnDefinitions="Auto,*"
-              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 
-            <Label Grid.Row="0" Grid.Column="0"
+            <!--<Image Grid.Row="0" Grid.Column="0"
+                   Source="settings.png"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />-->
+            
+            <Label Grid.Row="1" Grid.Column="0"
                    Text="Длина кода"
                    HorizontalOptions="Start"
                    VerticalOptions="Center" />
-            <Entry Grid.Row="0" Grid.Column="1"
+            <Entry Grid.Row="1" Grid.Column="1"
                    Keyboard="Numeric"
                    HorizontalOptions="Fill"
                    Text="{Binding CodeLength}" >
@@ -24,10 +32,10 @@
                 </Entry.Behaviors>
             </Entry>
 
-            <Label Grid.Row="1" Grid.Column="0"
+            <Label Grid.Row="2" Grid.Column="0"
                    Text="Количество попыток:"
                    VerticalOptions="Center" />
-            <Entry Grid.Row="1" Grid.Column="1"
+            <Entry Grid.Row="2" Grid.Column="1"
                    Text="{Binding MaxAttempts}"
                    Keyboard="Numeric"
                    HorizontalOptions="Fill" >
@@ -36,30 +44,30 @@
                 </Entry.Behaviors>
             </Entry> 
 
-            <Label Grid.Row="2" Grid.Column="0"
+            <Label Grid.Row="3" Grid.Column="0"
                    Text="Тема:"
                    VerticalOptions="Center" />
-            <Picker Grid.Row="2" Grid.Column="1"
+            <Picker Grid.Row="3" Grid.Column="1"
                     ItemsSource="{Binding AvailableThemes}"
                     ItemDisplayBinding="{Binding DisplayName}"
                     SelectedIndex="{Binding SelectedThemeIndex}"
                     HorizontalOptions="Fill" />
 
-            <Label Grid.Row="3" Grid.Column="0"
+            <Label Grid.Row="4" Grid.Column="0"
                    Text="Язык:"
                    VerticalOptions="Center" />
-            <Picker Grid.Row="3" Grid.Column="1"
+            <Picker Grid.Row="4" Grid.Column="1"
                     ItemsSource="{Binding AvailableLanguages}"
                     ItemDisplayBinding="{Binding DisplayName}"
                     SelectedIndex ="{Binding SelectedLanguageIndex}"
                     HorizontalOptions="Fill" />
             
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                     Text="Сохранить"
                     Command="{Binding SaveSettingsCommand}"
                     HorizontalOptions="Fill" />
             
-            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+            <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                     Text="Назад"
                     Clicked="OnBackClicked"
                     HorizontalOptions="Fill" />

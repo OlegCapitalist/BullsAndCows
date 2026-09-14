@@ -4,6 +4,10 @@
              x:Class="BullsAndCows.UI.Views.HelpPage"
              Title="Справка">
     <VerticalStackLayout>
+        <Image Source="help.png"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
         <Label 
             Text="Игра из себя представляет головоломку"
             VerticalOptions="Center" 
