@@ -4,7 +4,11 @@
              x:Class="BullsAndCows.UI.Views.Controls.LostView">
     <VerticalStackLayout IsVisible="{Binding IsLost}">
         <Label 
-            Text="Lost"
+            Text="ИГРА ОКОНЧЕНА"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
+            Text="Загаданный код был:"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Label 

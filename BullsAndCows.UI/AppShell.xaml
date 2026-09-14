@@ -16,10 +16,6 @@
         ContentTemplate="{DataTemplate views:GamePage}" />
 
     <ShellContent
-        Route="HelpPage"
-        ContentTemplate="{DataTemplate views:HelpPage}" />
-
-    <ShellContent
         Route="SettingsPage"
         ContentTemplate="{DataTemplate views:SettingsPage}" />
 </Shell>

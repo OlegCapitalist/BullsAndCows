@@ -18,7 +18,7 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Button 
-            Text="Настройки" 
+            Text="Настройки⚙" 
             Clicked="OnSettingsClicked"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
@@ -28,7 +28,7 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Button 
-            Text="Справка" 
+            Text="Правила" 
             Clicked="OnHelpClicked"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />

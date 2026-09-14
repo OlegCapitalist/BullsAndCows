@@ -4,10 +4,17 @@
              x:Class="BullsAndCows.UI.Views.Controls.WonView">
     <VerticalStackLayout IsVisible="{Binding IsWon}">
         <Label 
-            Text="ПОБЕДА!!!"
+            Text="🎉 ПРАВИЛЬНО!!! 🎉"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        
+
+        <!---->
+        <!--Text="Затрачено попыток: "-->
+        <Label 
+            Text="{Binding AttemptsCount, StringFormat='Затрачено попыток: {0}'}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
         <Image Source="won.png"
                Aspect="AspectFit"
                HorizontalOptions="Center"

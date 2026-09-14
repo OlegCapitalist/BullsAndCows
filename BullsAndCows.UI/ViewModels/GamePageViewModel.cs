@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using BullsAndCows.Application.DTOs;
 
-
 namespace BullsAndCows.UI.ViewModels;
 
 [AddINotifyPropertyChangedInterface]
@@ -19,9 +18,11 @@ public class GamePageViewModel
 
     public GameStatusDto Status { get; set; } = GameStatusDto.NotStarted;
 
-    public bool CanMakeGuess => Status == GameStatusDto.InProgress;
-    public bool IsWon => Status == GameStatusDto.Won;
-    public bool IsLost => Status == GameStatusDto.Lost;
+    public bool CanMakeGuess => Status is GameStatusDto.InProgress;
+    public bool IsWon => Status is GameStatusDto.Won;
+    public bool IsLost => Status is GameStatusDto.Lost;
+
+    public int AttemptsCount => Attempts.Count;
 
     public ObservableCollection<Attempt> Attempts { get; set; } = new();
 
@@ -53,6 +54,7 @@ public class GamePageViewModel
                 settings.MaxAttempts));
 
         SecretCode = "";
+        Attempts.Clear();
 
         Status = result.Status;
     }

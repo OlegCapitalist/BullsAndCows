@@ -8,15 +8,18 @@
         
         <Button Grid.Column="0"
                 Text="Новая игра"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                Clicked="OnNewGameClicked" />
         <Button Grid.Column="1"
                 Text="Выход"
                 SemanticProperties.Hint="Выход из игры"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                Clicked="OnExitClicked" />
         <Button Grid.Column="2"
-                Text="Правила⚙"
+                Text="Правила"
                 SemanticProperties.Hint="Показать правила игры"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                Clicked="OnHelpClicked" />
     </Grid>
 
 </ContentView>
