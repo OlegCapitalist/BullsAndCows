@@ -16,11 +16,13 @@
 
             <controls:AttemptsHistoryView Grid.Row="1" />
 
-            <controls:GuessInputView Grid.Row="2" />
+            <controls:BottomPanelView Grid.Row="2" />
+
+            <!--<controls:GuessInputView Grid.Row="2" />
 
             <controls:WonView Grid.Row="2" />
 
-            <controls:LostView Grid.Row="2" />
+            <controls:LostView Grid.Row="2" />-->
 
         </Grid>
 
@@ -33,11 +35,13 @@
 
             <controls:GameMenuView Grid.Row="0" Grid.Column="1" />
 
-            <controls:GuessInputView Grid.Row="1" Grid.Column="1" />
+            <controls:BottomPanelView Grid.Row="1" Grid.Column="1" />
+            
+            <!--<controls:GuessInputView Grid.Row="1" Grid.Column="1" />
 
             <controls:WonView Grid.Row="1" Grid.Column="1" />
 
-            <controls:LostView Grid.Row="1" Grid.Column="1" />
+            <controls:LostView Grid.Row="1" Grid.Column="1" />-->
 
         </Grid>
 

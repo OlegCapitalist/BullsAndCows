@@ -8,6 +8,10 @@
             Text="Добро пожаловать в игру Bulls and Cows!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Image Source="home.png"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
         <Button 
             Text="Начать игру" 
             Clicked="OnStartGameClicked"

@@ -11,5 +11,9 @@
             Text="{Binding SecretCode}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Image Source="lost.png"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
     </VerticalStackLayout>
 </ContentView>

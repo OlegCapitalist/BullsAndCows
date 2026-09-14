@@ -4,6 +4,6 @@ public partial class LostView : ContentView
 {
 	public LostView()
 	{
-		InitializeComponent();
+        InitializeComponent();
 	}
 }

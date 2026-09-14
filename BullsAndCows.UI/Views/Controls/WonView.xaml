@@ -7,5 +7,10 @@
             Text="ПОБЕДА!!!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        
+        <Image Source="won.png"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
     </VerticalStackLayout>
 </ContentView>
