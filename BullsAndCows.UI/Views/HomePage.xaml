@@ -12,25 +12,46 @@
                Aspect="AspectFit"
                HorizontalOptions="Center"
                VerticalOptions="Center" />
-        <Button 
-            Text="Начать игру" 
-            Clicked="OnStartGameClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button 
-            Text="Настройки⚙" 
-            Clicked="OnSettingsClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button 
-            Text="Рекорды" 
-            Clicked="Button_Clicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button 
-            Text="Правила" 
-            Clicked="OnHelpClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+        <VerticalStackLayout IsVisible="{Binding IsMenuVisible}" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Spacing="20" >
+            <Button 
+                Text="Начать игру" 
+                Clicked="OnStartGameClicked"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button 
+                Text="Настройки⚙" 
+                Clicked="OnSettingsClicked"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button 
+                Text="Рекорды" 
+                Clicked="Button_Clicked"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button 
+                Text="Правила" 
+                Clicked="OnHelpClicked"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout IsVisible="{Binding IsLoadingVisible}" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Spacing ="20" >
+            <ActivityIndicator
+                IsRunning="True"
+                WidthRequest="48"
+                HeightRequest="48" />
+            <Label
+                Text="Загрузка..."
+                FontSize="18"
+                HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+        
     </VerticalStackLayout>
 </ContentPage>

@@ -6,6 +6,8 @@ namespace BullsAndCows.Application.Services;
 public class SettingsService : ISettingsService
 {
     private readonly ISettingsStorage _settingsStorage;
+    private AppSettingsDto? _current;
+    public AppSettingsDto Current => _current ?? throw new InvalidOperationException("Settings are not loaded.");
 
     public SettingsService(ISettingsStorage settingsStorage)
     {
@@ -15,9 +17,9 @@ public class SettingsService : ISettingsService
     public async Task<AppSettingsDto> GetSettingsAsync(
         CancellationToken cancellationToken = default)
     {
-        var settings = await _settingsStorage.LoadAsync(cancellationToken);
+        _current = await _settingsStorage.LoadAsync(cancellationToken);
 
-        return settings ?? GetDefaultSettings();
+        return _current ?? GetDefaultSettings();
     }
 
     public async Task SaveSettingsAsync(
@@ -26,6 +28,7 @@ public class SettingsService : ISettingsService
     {
         Validate(settings);
 
+        _current = settings;
         await _settingsStorage.SaveAsync(settings, cancellationToken);
     }
 

@@ -11,13 +11,14 @@
               RowSpacing="12"
               ColumnSpacing="16"
               ColumnDefinitions="Auto,*"
-              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+              RowDefinitions="*,Auto,Auto,Auto,Auto,Auto,Auto">
 
-            <!--<Image Grid.Row="0" Grid.Column="0"
+            <Image Grid.Row="0" Grid.Column="0"
+                   Grid.ColumnSpan="2"
                    Source="settings.png"
                    Aspect="AspectFit"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center" />-->
+                   VerticalOptions="Center" />
             
             <Label Grid.Row="1" Grid.Column="0"
                    Text="Длина кода"
@@ -47,20 +48,23 @@
             <Label Grid.Row="3" Grid.Column="0"
                    Text="Тема:"
                    VerticalOptions="Center" />
+
             <Picker Grid.Row="3" Grid.Column="1"
                     ItemsSource="{Binding AvailableThemes}"
                     ItemDisplayBinding="{Binding DisplayName}"
                     SelectedIndex="{Binding SelectedThemeIndex}"
                     HorizontalOptions="Fill" />
-
+            
             <Label Grid.Row="4" Grid.Column="0"
                    Text="Язык:"
                    VerticalOptions="Center" />
+            
             <Picker Grid.Row="4" Grid.Column="1"
                     ItemsSource="{Binding AvailableLanguages}"
                     ItemDisplayBinding="{Binding DisplayName}"
                     SelectedIndex ="{Binding SelectedLanguageIndex}"
                     HorizontalOptions="Fill" />
+            
             
             <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                     Text="Сохранить"

@@ -1,6 +1,7 @@
 ﻿using BullsAndCows.Application.DTOs;
 using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Application.Services;
+using BullsAndCows.UI.Interfaces;
 using BullsAndCows.UI.Models;
 using PropertyChanged;
 using System.Windows.Input;
@@ -11,6 +12,7 @@ namespace BullsAndCows.UI.ViewModels;
 public class SettingsPageViewModel
 {
     private readonly ISettingsService _settingsService = null!;
+    private readonly IThemeService _themeService = null!;
 
     private readonly Dictionary<string, string> localizationMock = new()
     {
@@ -61,9 +63,10 @@ public class SettingsPageViewModel
 
     public ICommand SaveSettingsCommand { get; }
 
-    public SettingsPageViewModel(ISettingsService settingsService)
+    public SettingsPageViewModel(ISettingsService settingsService, IThemeService themeService)
     {
         _settingsService = settingsService;
+        _themeService = themeService;
 
         SaveSettingsCommand = new Command(async () => await SaveSettingsAsync());
 
@@ -89,10 +92,14 @@ public class SettingsPageViewModel
 
         SelectedTheme = Enum.Parse<Themes>(settings.Theme, true);
         SelectedLanguage = Enum.Parse<Languages>(settings.Language, true);
+
+        _themeService.Apply(SelectedTheme);
     }
 
     private async Task SaveSettingsAsync()
     {
+        _themeService.Apply(SelectedTheme);
+
         await _settingsService.SaveSettingsAsync(new AppSettingsDto(CodeLength, MaxAttempts, SelectedTheme.ToString(), SelectedLanguage.ToString()));
 
         await Shell.Current.GoToAsync("//HomePage");

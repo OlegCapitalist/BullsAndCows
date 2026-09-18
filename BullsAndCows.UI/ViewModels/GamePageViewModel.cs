@@ -46,7 +46,8 @@ public class GamePageViewModel
 
     public async Task StartGameAsync()
     {
-        var settings = await _settingsService.GetSettingsAsync();
+        //var settings = await _settingsService.GetSettingsAsync();
+        var settings = _settingsService.Current;
 
         var result = _gameAppService.StartGame(
             new StartGameRequest(

@@ -118,10 +118,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Interfaces\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiAsset Update="Resources\Raw\appsettings.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </MauiAsset>
