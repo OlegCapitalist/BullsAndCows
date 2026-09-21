@@ -1,4 +1,5 @@
 ﻿using BullsAndCows.Application.DTOs;
+using BullsAndCows.Application.Models;
 using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Application.Services;
 using BullsAndCows.UI.Interfaces;
@@ -87,11 +88,11 @@ public class SettingsPageViewModel
     public async Task LoadSettingsAsync()
     {
         var settings = await _settingsService.GetSettingsAsync();
-        CodeLength = settings.CodeLength;
-        MaxAttempts = settings.MaxAttempts;
+        CodeLength = settings.GameSettings.CodeLength;
+        MaxAttempts = settings.GameSettings.MaxAttempts;
 
-        SelectedTheme = Enum.Parse<Themes>(settings.Theme, true);
-        SelectedLanguage = Enum.Parse<Languages>(settings.Language, true);
+        SelectedTheme = Enum.Parse<Themes>(settings.UiSettings.Theme, true);
+        SelectedLanguage = Enum.Parse<Languages>(settings.UiSettings.Language, true);
 
         _themeService.Apply(SelectedTheme);
     }
@@ -100,7 +101,11 @@ public class SettingsPageViewModel
     {
         _themeService.Apply(SelectedTheme);
 
-        await _settingsService.SaveSettingsAsync(new AppSettingsDto(CodeLength, MaxAttempts, SelectedTheme.ToString(), SelectedLanguage.ToString()));
+        await _settingsService.SaveSettingsAsync(new AppSettingsDto(
+            new GameSettings(CodeLength, MaxAttempts),
+            new UiSettings(SelectedTheme.ToString(), SelectedLanguage.ToString()),
+            new DatabaseSettings("System", "DefaultConnectionString")
+        ));
 
         await Shell.Current.GoToAsync("//HomePage");
     }

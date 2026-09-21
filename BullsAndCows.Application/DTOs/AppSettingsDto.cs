@@ -1,7 +1,9 @@
-﻿namespace BullsAndCows.Application.DTOs;
+﻿using BullsAndCows.Application.Models;
+
+namespace BullsAndCows.Application.DTOs;
 
 public record AppSettingsDto(
-    int CodeLength,
-    int MaxAttempts,
-    string Theme,
-    string Language);
+    GameSettings GameSettings,
+    UiSettings UiSettings,
+    DatabaseSettings DatabaseSettings
+);

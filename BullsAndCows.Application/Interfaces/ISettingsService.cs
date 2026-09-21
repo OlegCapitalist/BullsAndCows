@@ -12,5 +12,4 @@ public interface ISettingsService
 
     Task SaveSettingsAsync(AppSettingsDto settings, CancellationToken cancellationToken = default);
 
-    AppSettingsDto GetDefaultSettings();
 }

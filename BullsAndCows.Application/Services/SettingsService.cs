@@ -19,7 +19,7 @@ public class SettingsService : ISettingsService
     {
         _current = await _settingsStorage.LoadAsync(cancellationToken);
 
-        return _current ?? GetDefaultSettings();
+        return _current;
     }
 
     public async Task SaveSettingsAsync(
@@ -30,11 +30,6 @@ public class SettingsService : ISettingsService
 
         _current = settings;
         await _settingsStorage.SaveAsync(settings, cancellationToken);
-    }
-
-    public AppSettingsDto GetDefaultSettings()
-    {
-        return new AppSettingsDto(4, 10, "System", "Russian");
     }
 
     private static void Validate(AppSettingsDto settings)
