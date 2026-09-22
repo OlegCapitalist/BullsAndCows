@@ -15,7 +15,7 @@ public class SettingsPageViewModel
     private readonly ISettingsService _settingsService = null!;
     private readonly IThemeService _themeService = null!;
 
-    private readonly Dictionary<string, string> localizationMock = new()
+    private readonly Dictionary<string, string> _settingsMock = new()
     {
         { "Language_English", "English" },
         { "Language_Russian", "Русский" },
@@ -72,16 +72,16 @@ public class SettingsPageViewModel
         SaveSettingsCommand = new Command(async () => await SaveSettingsAsync());
 
         AvailableLanguages = [
-            new(Languages.English, localizationMock["Language_English"]),
-            new(Languages.Russian, localizationMock["Language_Russian"]),
-            new(Languages.QazaqCyrillic, localizationMock["Language_QazaqCyrillic"]),
-            new(Languages.QazaqLatin, localizationMock["Language_QazaqLatin"])
+            new(Languages.English, _settingsMock["Language_English"]),
+            new(Languages.Russian, _settingsMock["Language_Russian"]),
+            new(Languages.QazaqCyrillic, _settingsMock["Language_QazaqCyrillic"]),
+            new(Languages.QazaqLatin, _settingsMock["Language_QazaqLatin"])
         ];
 
         AvailableThemes = [
-            new(Themes.System, localizationMock["Theme_System"]),
-            new(Themes.Light, localizationMock["Theme_Light"]),
-            new(Themes.Dark, localizationMock["Theme_Dark"])
+            new(Themes.System, _settingsMock["Theme_System"]),
+            new(Themes.Light, _settingsMock["Theme_Light"]),
+            new(Themes.Dark, _settingsMock["Theme_Dark"])
         ];
     }   
 
@@ -101,11 +101,10 @@ public class SettingsPageViewModel
     {
         _themeService.Apply(SelectedTheme);
 
-        await _settingsService.SaveSettingsAsync(new AppSettingsDto(
+        await _settingsService.SaveSettingsAsync(
             new GameSettings(CodeLength, MaxAttempts),
-            new UiSettings(SelectedTheme.ToString(), SelectedLanguage.ToString()),
-            new DatabaseSettings("System", "DefaultConnectionString")
-        ));
+            new UiSettings(SelectedTheme.ToString(), SelectedLanguage.ToString())
+        );
 
         await Shell.Current.GoToAsync("//HomePage");
     }

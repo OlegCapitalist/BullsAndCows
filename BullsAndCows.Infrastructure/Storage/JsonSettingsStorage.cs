@@ -14,6 +14,7 @@ public class JsonSettingsStorage : ISettingsStorage
 
     private readonly string _filePath = String.Empty;
     private readonly Func<CancellationToken, Task<Stream>> _defaultSettingsStreamFactory;
+    private AppSettingsDto _current;
 
     public JsonSettingsStorage(string filePath,
         Func<CancellationToken, Task<Stream>> defaultSettingsStreamFactory)
@@ -24,6 +25,8 @@ public class JsonSettingsStorage : ISettingsStorage
         _filePath = filePath;
         _defaultSettingsStreamFactory = defaultSettingsStreamFactory;
     }
+
+    //public async Task
 
     public async Task<AppSettingsDto> LoadAsync(
         CancellationToken cancellationToken = default)
@@ -38,12 +41,13 @@ public class JsonSettingsStorage : ISettingsStorage
             bufferSize: 4096,
             useAsync: true))
         {
-            return await JsonSerializer.DeserializeAsync<AppSettingsDto>(
+            _current = await JsonSerializer.DeserializeAsync<AppSettingsDto>(
                 stream,
                 jsonOptions,
                 cancellationToken)
                 ?? throw new InvalidDataException(
                     "Settings file does not contain a valid object.");
+            return _current;
         }
     }
 

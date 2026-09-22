@@ -1,5 +1,6 @@
 ﻿using BullsAndCows.Application.DTOs;
 using BullsAndCows.Application.Interfaces;
+using BullsAndCows.Application.Models;
 
 namespace BullsAndCows.Application.Services;
 
@@ -23,16 +24,17 @@ public class SettingsService : ISettingsService
     }
 
     public async Task SaveSettingsAsync(
-        AppSettingsDto settings,
+        GameSettings gameSettings,
+        UiSettings uiSettings,
         CancellationToken cancellationToken = default)
     {
-        Validate(settings);
+        Validate(gameSettings);
 
         _current = settings;
         await _settingsStorage.SaveAsync(settings, cancellationToken);
     }
 
-    private static void Validate(AppSettingsDto settings)
+    private static void Validate(GameSettings settings)
     {
         if (settings.CodeLength is < 1 or > 10)
             throw new ArgumentOutOfRangeException(
