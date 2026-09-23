@@ -7,34 +7,33 @@ namespace BullsAndCows.Application.Services;
 public class SettingsService : ISettingsService
 {
     private readonly ISettingsStorage _settingsStorage;
-    private AppSettingsDto? _current;
-    public AppSettingsDto Current => _current ?? throw new InvalidOperationException("Settings are not loaded.");
+    private UserSettings? _current;
+    public UserSettings Current => _current ?? throw new InvalidOperationException("Settings are not loaded.");
 
     public SettingsService(ISettingsStorage settingsStorage)
     {
         _settingsStorage = settingsStorage;
     }
 
-    public async Task<AppSettingsDto> GetSettingsAsync(
+    public async Task<UserSettings> GetSettingsAsync(
         CancellationToken cancellationToken = default)
     {
-        _current = await _settingsStorage.LoadAsync(cancellationToken);
+        _current = await _settingsStorage.LoadUserSettingsAsync(cancellationToken);
 
-        return _current;
+        return Current;
     }
 
     public async Task SaveSettingsAsync(
-        GameSettings gameSettings,
-        UiSettings uiSettings,
+        UserSettings userSettings,
         CancellationToken cancellationToken = default)
     {
-        Validate(gameSettings);
+        Validate(userSettings);
 
-        _current = settings;
-        await _settingsStorage.SaveAsync(settings, cancellationToken);
+        _current = userSettings;
+        await _settingsStorage.SaveUserSettingsAsync(userSettings, cancellationToken);
     }
 
-    private static void Validate(GameSettings settings)
+    private static void Validate(UserSettings settings)
     {
         if (settings.CodeLength is < 1 or > 10)
             throw new ArgumentOutOfRangeException(

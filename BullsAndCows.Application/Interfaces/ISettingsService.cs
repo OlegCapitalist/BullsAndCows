@@ -1,16 +1,12 @@
-﻿using BullsAndCows.Application.DTOs;
-using BullsAndCows.Application.Models;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using BullsAndCows.Application.Models;
 
 namespace BullsAndCows.Application.Interfaces;
 
 public interface ISettingsService
 {
-    AppSettingsDto Current { get; }
+    UserSettings Current { get; }
 
-    Task<AppSettingsDto> GetSettingsAsync(CancellationToken cancellationToken = default);
+    Task<UserSettings> GetSettingsAsync(CancellationToken cancellationToken = default);
 
-    Task SaveSettingsAsync(GameSettings gameSettings, UiSettings uiSettings, CancellationToken cancellationToken = default);
-
+    Task SaveSettingsAsync(UserSettings userSettings, CancellationToken cancellationToken = default);
 }

@@ -88,11 +88,11 @@ public class SettingsPageViewModel
     public async Task LoadSettingsAsync()
     {
         var settings = await _settingsService.GetSettingsAsync();
-        CodeLength = settings.GameSettings.CodeLength;
-        MaxAttempts = settings.GameSettings.MaxAttempts;
+        CodeLength = settings.CodeLength;
+        MaxAttempts = settings.MaxAttempts;
 
-        SelectedTheme = Enum.Parse<Themes>(settings.UiSettings.Theme, true);
-        SelectedLanguage = Enum.Parse<Languages>(settings.UiSettings.Language, true);
+        SelectedTheme = Enum.Parse<Themes>(settings.Theme, true);
+        SelectedLanguage = Enum.Parse<Languages>(settings.Language, true);
 
         _themeService.Apply(SelectedTheme);
     }
@@ -102,8 +102,7 @@ public class SettingsPageViewModel
         _themeService.Apply(SelectedTheme);
 
         await _settingsService.SaveSettingsAsync(
-            new GameSettings(CodeLength, MaxAttempts),
-            new UiSettings(SelectedTheme.ToString(), SelectedLanguage.ToString())
+            new UserSettings(CodeLength, MaxAttempts, SelectedTheme.ToString(), SelectedLanguage.ToString())
         );
 
         await Shell.Current.GoToAsync("//HomePage");

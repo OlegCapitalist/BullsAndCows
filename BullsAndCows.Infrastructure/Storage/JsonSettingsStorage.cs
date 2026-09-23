@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using BullsAndCows.Application.DTOs;
 using BullsAndCows.Application.Interfaces;
+using BullsAndCows.Application.Models;
 
 namespace BullsAndCows.Infrastructure.Storage;
 
@@ -14,7 +15,7 @@ public class JsonSettingsStorage : ISettingsStorage
 
     private readonly string _filePath = String.Empty;
     private readonly Func<CancellationToken, Task<Stream>> _defaultSettingsStreamFactory;
-    private AppSettingsDto _current;
+    private AppSettingsDto? _current;
 
     public JsonSettingsStorage(string filePath,
         Func<CancellationToken, Task<Stream>> defaultSettingsStreamFactory)
@@ -26,9 +27,36 @@ public class JsonSettingsStorage : ISettingsStorage
         _defaultSettingsStreamFactory = defaultSettingsStreamFactory;
     }
 
-    //public async Task
+    public async Task<UserSettings> LoadUserSettingsAsync(CancellationToken cancellationToken = default)
+    {
+        if (_current is not null)
+            return _current.UserSettings;
 
-    public async Task<AppSettingsDto> LoadAsync(
+        var appSettings = await LoadAsync(cancellationToken);
+        return appSettings.UserSettings;
+    }
+
+    public async Task<DatabaseSettings> LoadDatabaseSettingsAsync(CancellationToken cancellationToken = default)
+    {
+        if (_current is not null)
+            return _current.DatabaseSettings;
+
+        var appSettings = await LoadAsync(cancellationToken);
+        return appSettings.DatabaseSettings;
+    }
+
+    public async Task SaveUserSettingsAsync(
+        UserSettings userSettings,
+        CancellationToken cancellationToken = default)
+    {
+        if (_current is null)
+            _current = await LoadAsync(cancellationToken);
+
+        var updatedSettings = _current with { UserSettings = userSettings };
+        await SaveAsync(updatedSettings, cancellationToken);
+    }
+
+    private async Task<AppSettingsDto> LoadAsync(
         CancellationToken cancellationToken = default)
     {
         await EnsureCreatedAsync(cancellationToken);
@@ -51,7 +79,7 @@ public class JsonSettingsStorage : ISettingsStorage
         }
     }
 
-    public async Task SaveAsync(
+    private async Task SaveAsync(
         AppSettingsDto settings,
         CancellationToken cancellationToken = default)
     {
@@ -78,7 +106,7 @@ public class JsonSettingsStorage : ISettingsStorage
         }
     }
 
-    public async Task EnsureCreatedAsync(CancellationToken cancellationToken = default)
+    private async Task EnsureCreatedAsync(CancellationToken cancellationToken = default)
     {
         if (File.Exists(_filePath))
             return;

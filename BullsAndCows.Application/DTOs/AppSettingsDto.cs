@@ -3,13 +3,6 @@
 namespace BullsAndCows.Application.DTOs;
 
 public record AppSettingsDto(
-    GameSettings GameSettings,
-    UiSettings UiSettings,
+    UserSettings UserSettings,
     DatabaseSettings DatabaseSettings
-)
-{
-    public AppSettingsDto(GameSettings GameSettings, UiSettings UiSettings)
-        : this(GameSettings, UiSettings, new DatabaseSettings())
-    {
-    }
-}
+);
