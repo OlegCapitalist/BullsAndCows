@@ -1,5 +1,4 @@
-﻿using BullsAndCows.Application.DTOs;
-using BullsAndCows.Application.Interfaces;
+﻿using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Application.Models;
 
 namespace BullsAndCows.Application.Services;
@@ -8,8 +7,6 @@ public class SettingsService : ISettingsService
 {
     private readonly ISettingsStorage _settingsStorage;
     private UserSettings? _current;
-    public UserSettings Current => _current ?? throw new InvalidOperationException("Settings are not loaded.");
-
     public SettingsService(ISettingsStorage settingsStorage)
     {
         _settingsStorage = settingsStorage;
@@ -18,9 +15,12 @@ public class SettingsService : ISettingsService
     public async Task<UserSettings> GetSettingsAsync(
         CancellationToken cancellationToken = default)
     {
+        if (_current is UserSettings current)
+            return current;
+
         _current = await _settingsStorage.LoadUserSettingsAsync(cancellationToken);
 
-        return Current;
+        return _current ?? throw new InvalidOperationException("Settings are not loaded."); ;
     }
 
     public async Task SaveSettingsAsync(
