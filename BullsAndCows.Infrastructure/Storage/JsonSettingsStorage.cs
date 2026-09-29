@@ -15,7 +15,7 @@ public class JsonSettingsStorage : ISettingsStorage
 
     private readonly string _filePath = String.Empty;
     private readonly Func<CancellationToken, Task<Stream>> _defaultSettingsStreamFactory;
-    private AppSettingsDto? _current;
+    private AppSettingsDto? _current = null;
 
     public JsonSettingsStorage(string filePath,
         Func<CancellationToken, Task<Stream>> defaultSettingsStreamFactory)
@@ -52,14 +52,42 @@ public class JsonSettingsStorage : ISettingsStorage
         if (_current is null)
             _current = await LoadAsync(cancellationToken);
 
-        var updatedSettings = _current with { UserSettings = userSettings };
-        await SaveAsync(updatedSettings, cancellationToken);
+        _current = _current with { UserSettings = userSettings };
+
+        await SaveAsync(_current, cancellationToken);
     }
 
     private async Task<AppSettingsDto> LoadAsync(
         CancellationToken cancellationToken = default)
     {
         await EnsureCreatedAsync(cancellationToken);
+
+        var testJson = """
+        {
+          "userSettings": {
+            "codeLength": 4,
+            "maxAttempts": 10,
+            "theme": "System",
+            "language": "Russian"
+          },
+          "databaseSettings": {
+            "provider": "SQLite",
+            "connectionString": "bullsandcows.db3"
+          },
+          "codeLength": 4,
+          "maxAttempts": 10,
+          "theme": "System",
+          "language": "Russian"
+        }
+        """;
+
+        var test = JsonSerializer.Deserialize<AppSettingsDto>(testJson, jsonOptions);
+
+        var json = await File.ReadAllTextAsync(
+            _filePath,
+            cancellationToken);
+
+        var settings = JsonSerializer.Deserialize<AppSettingsDto>(json);
 
         await using (var stream = new FileStream(
             _filePath,
@@ -70,9 +98,9 @@ public class JsonSettingsStorage : ISettingsStorage
             useAsync: true))
         {
             _current = await JsonSerializer.DeserializeAsync<AppSettingsDto>(
-                stream,
-                jsonOptions,
-                cancellationToken)
+                utf8Json: stream,
+                options: jsonOptions,
+                cancellationToken: cancellationToken)
                 ?? throw new InvalidDataException(
                     "Settings file does not contain a valid object.");
             return _current;

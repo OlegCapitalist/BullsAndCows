@@ -14,6 +14,7 @@ public class SettingsPageViewModel
 {
     private readonly ISettingsService _settingsService = null!;
     private readonly IThemeService _themeService = null!;
+    private Themes _oldTheme;
 
     private readonly Dictionary<string, string> _settingsMock = new()
     {
@@ -68,6 +69,7 @@ public class SettingsPageViewModel
     {
         _settingsService = settingsService;
         _themeService = themeService;
+        _oldTheme = _themeService.CurrentTheme;
 
         SaveSettingsCommand = new Command(async () => await SaveSettingsAsync());
 
@@ -94,12 +96,14 @@ public class SettingsPageViewModel
         SelectedTheme = Enum.Parse<Themes>(settings.Theme, true);
         SelectedLanguage = Enum.Parse<Languages>(settings.Language, true);
 
-        _themeService.Apply(SelectedTheme);
+        if (SelectedTheme != _oldTheme)
+            _themeService.Apply(SelectedTheme);
     }
 
     private async Task SaveSettingsAsync()
     {
-        _themeService.Apply(SelectedTheme);
+        if (SelectedTheme != _oldTheme)
+            _themeService.Apply(SelectedTheme);
 
         await _settingsService.SaveSettingsAsync(
             new UserSettings(CodeLength, MaxAttempts, SelectedTheme.ToString(), SelectedLanguage.ToString())
