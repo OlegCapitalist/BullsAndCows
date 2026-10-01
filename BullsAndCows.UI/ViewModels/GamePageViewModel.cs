@@ -22,7 +22,7 @@ public class GamePageViewModel
     public bool IsWon => Status is GameStatusDto.Won;
     public bool IsLost => Status is GameStatusDto.Lost;
 
-    public int AttemptsCount => Attempts.Count;
+    public int AttemptsCount { get; private set; }
 
     public ObservableCollection<Attempt> Attempts { get; set; } = new();
 
@@ -90,6 +90,7 @@ public class GamePageViewModel
 
         var result = _gameAppService.MakeGuess(new MakeGuessRequest(Guess));
         Attempts.Add(new Attempt(Attempts.Count + 1, Guess, result.Bulls, result.Cows, DateTime.Now));
+        AttemptsCount = Attempts.Count;
 
         Status = result.Status;
         SecretCode = Status is GameStatusDto.Lost ? _gameAppService.SecretCode : "";
