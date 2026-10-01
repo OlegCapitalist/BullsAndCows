@@ -8,8 +8,6 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <!---->
-        <!--Text="Затрачено попыток: "-->
         <Label 
             Text="{Binding AttemptsCount, StringFormat='Затрачено попыток: {0}'}"
             VerticalOptions="Center" 
