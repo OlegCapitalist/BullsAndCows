@@ -1,5 +1,5 @@
 ﻿
-using BullsAndCows.Infrastructure.Models;
+using BullsAndCows.Application.Models;
 using SQLite;
 
 namespace BullsAndCows.Infrastructure.DataBase;
@@ -29,4 +29,6 @@ public class GameDatabase
 
         return _connection;
     }
+
+
 }

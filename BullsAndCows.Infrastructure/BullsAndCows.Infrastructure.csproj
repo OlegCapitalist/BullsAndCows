@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\Database\" />
-    <Folder Include="Persistence\Repositories\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>
