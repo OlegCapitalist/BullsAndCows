@@ -20,7 +20,7 @@ public class SettingsService : ISettingsService
 
         _current = await _settingsStorage.LoadUserSettingsAsync(cancellationToken);
 
-        return _current ?? throw new InvalidOperationException("Settings are not loaded."); ;
+        return _current ?? throw new InvalidOperationException("Settings are not loaded.");
     }
 
     public async Task SaveSettingsAsync(

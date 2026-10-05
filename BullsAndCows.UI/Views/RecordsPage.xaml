@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BullsAndCows.UI.Views.RecordsPage"
+             Title="RecordsPage">
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+        <Label Grid.Row="0"
+               Text="Таблица рекордов"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Margin="0,20,0,10" />
+        <Picker Grid.Row="1"
+             ItemsSource="{Binding AvailableCodeLengths}"
+             SelectedItem="{Binding SelectedCodeLength}"
+             HorizontalOptions="Fill" />
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Records}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="1"
+                            Padding="10"
+                            Margin="10,4">
+                        <Grid ColumnDefinitions="50,*,Auto">
+                            <Label Grid.Column="0"
+                                   Text="{Binding Number}"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding AttemptsCount}"
+                                   FontSize="16" />
+                            <Label Grid.Column="2"
+                                   Text="{Binding PlayedAt, StringFormat='Дата: {0:dd/MM/yyyy}'}"
+                                   FontSize="14" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="3"
+                Text="Очистить рекорды"
+                Command="{Binding ClearRecordsCommand}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="0,10" />
+        <Button Grid.Row="4"
+                Text="Назад" 
+                Clicked="OnBackClicked"
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" 
+                Margin="0,10" />
+    </Grid>
+</ContentPage>

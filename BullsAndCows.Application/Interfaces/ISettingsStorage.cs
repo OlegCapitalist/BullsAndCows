@@ -9,5 +9,7 @@ public interface ISettingsStorage
 {
     Task<UserSettings> LoadUserSettingsAsync(CancellationToken cancellationToken = default);
 
+    Task<DatabaseSettings> LoadDatabaseSettingsAsync(CancellationToken cancellationToken = default);
+
     Task SaveUserSettingsAsync(UserSettings userSettings, CancellationToken cancellationToken = default);
 }

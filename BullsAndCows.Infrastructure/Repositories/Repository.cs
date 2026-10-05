@@ -15,7 +15,12 @@ public class Repository : IGameRecordRepository
 
     public async Task AddAsync(GameRecord record, CancellationToken cancellationToken = default)
     {
-        
+        var connection = await _database.GetConnectionAsync(cancellationToken);
+
+        if (record.Id == Guid.Empty)
+            record.Id = Guid.NewGuid();
+
+        await connection.InsertAsync(record);
     }
 
 
@@ -24,10 +29,21 @@ public class Repository : IGameRecordRepository
         int limit,
         CancellationToken cancellationToken = default)
     {
-        return new List<GameRecord>();
+        var connection = await _database.GetConnectionAsync(cancellationToken);
+
+        return await connection
+            .Table<GameRecord>()
+            .Where(x => x.CodeLength == codeLength)
+            .OrderBy(x => x.AttemptsCount)
+            .ThenBy(x => x.PlayedAt)    
+            .Take(limit)
+            .ToListAsync();
     }
 
     public async Task ClearAsync(CancellationToken cancellationToken = default)
     {
+        var connection = await _database.GetConnectionAsync(cancellationToken);
+
+        await connection.DeleteAllAsync<GameRecord>();
     }
 }

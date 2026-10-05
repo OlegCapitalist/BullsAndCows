@@ -23,13 +23,13 @@
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
             <Button 
-                Text="Настройки⚙" 
+                Text="⚙Настройки" 
                 Clicked="OnSettingsClicked"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
             <Button 
                 Text="Рекорды" 
-                Clicked="Button_Clicked"
+                Clicked="OnRecordsClicked"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
             <Button 

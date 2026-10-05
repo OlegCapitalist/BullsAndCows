@@ -43,7 +43,12 @@ public partial class HomePage : ContentPage
         await DisplayAlert("Настройки", "Страница настроек пока не реализована.", "ОК");
     }
 
-	private async void OnHelpClicked(object sender, EventArgs e)
+    private async void OnRecordsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(RecordsPage));
+    }
+
+    private async void OnHelpClicked(object sender, EventArgs e)
 	{
         await Shell.Current.GoToAsync(nameof(HelpPage));
     }

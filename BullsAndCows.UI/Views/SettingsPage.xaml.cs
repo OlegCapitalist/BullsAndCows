@@ -4,14 +4,17 @@ namespace BullsAndCows.UI.Views;
 
 public partial class SettingsPage : ContentPage
 {
+    //private readonly RecordsPageViewModel _viewModel;
     private SettingsPageViewModel ViewModel =>
         (SettingsPageViewModel)BindingContext;
 
     public SettingsPage(SettingsPageViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = viewModel;
-	}
+
+        //_viewModel = viewModel;
+        BindingContext = viewModel;
+    }
 
     protected override async void OnAppearing()
     {
