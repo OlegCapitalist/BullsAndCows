@@ -98,5 +98,10 @@ public class GamePageViewModel
         Guess = "";
     }
 
+    private async Task SaveRecordsAsync()
+    {
+        // Implementation for saving records
+        await Task.CompletedTask;
+    }
 
 }

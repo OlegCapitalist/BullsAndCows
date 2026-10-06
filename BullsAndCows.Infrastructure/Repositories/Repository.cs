@@ -31,13 +31,23 @@ public class Repository : IGameRecordRepository
     {
         var connection = await _database.GetConnectionAsync(cancellationToken);
 
-        return await connection
-            .Table<GameRecord>()
+        return await connection.Table<GameRecord>()
             .Where(x => x.CodeLength == codeLength)
             .OrderBy(x => x.AttemptsCount)
             .ThenBy(x => x.PlayedAt)    
             .Take(limit)
             .ToListAsync();
+    }
+
+    public async Task<IReadOnlyList<int>> GetAvailableCodeLengthsAsync(CancellationToken cancellationToken = default)
+    {
+        var connection = await _database.GetConnectionAsync(cancellationToken);
+        return await connection.QueryScalarsAsync<int>(
+            """
+            SELECT DISTINCT CodeLength
+            FROM GameRecord
+            ORDER BY CodeLength
+            """);
     }
 
     public async Task ClearAsync(CancellationToken cancellationToken = default)
@@ -46,4 +56,5 @@ public class Repository : IGameRecordRepository
 
         await connection.DeleteAllAsync<GameRecord>();
     }
+
 }

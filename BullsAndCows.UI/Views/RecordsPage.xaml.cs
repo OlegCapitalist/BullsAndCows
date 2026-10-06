@@ -16,7 +16,7 @@ public partial class RecordsPage : ContentPage
     {
         base.OnAppearing();
 
-        await ViewModel.LoadRecordsAsync();
+        await ViewModel.InitializeLoadAsync();
     }
 
     private async void OnBackClicked(object sender, EventArgs e)

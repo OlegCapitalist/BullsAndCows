@@ -11,5 +11,6 @@ public interface IGameRecordRepository
         int limit,
         CancellationToken cancellationToken = default);
 
+    Task<IReadOnlyList<int>> GetAvailableCodeLengthsAsync(CancellationToken cancellationToken = default);
     Task ClearAsync(CancellationToken cancellationToken = default);
 }
