@@ -62,33 +62,6 @@ public class JsonSettingsStorage : ISettingsStorage
     {
         await EnsureCreatedAsync(cancellationToken);
 
-        var testJson = """
-        {
-          "userSettings": {
-            "codeLength": 4,
-            "maxAttempts": 10,
-            "theme": "System",
-            "language": "Russian"
-          },
-          "databaseSettings": {
-            "provider": "SQLite",
-            "connectionString": "bullsandcows.db3"
-          },
-          "codeLength": 4,
-          "maxAttempts": 10,
-          "theme": "System",
-          "language": "Russian"
-        }
-        """;
-
-        var test = JsonSerializer.Deserialize<AppSettingsDto>(testJson, jsonOptions);
-
-        var json = await File.ReadAllTextAsync(
-            _filePath,
-            cancellationToken);
-
-        var settings = JsonSerializer.Deserialize<AppSettingsDto>(json);
-
         await using (var stream = new FileStream(
             _filePath,
             FileMode.Open,
