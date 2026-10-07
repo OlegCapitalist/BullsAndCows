@@ -4,5 +4,5 @@ namespace BullsAndCows.Core.Interfaces;
 
 public interface ISecretCodeGenerator
 {
-    SecretCode Generate();
+    SecretCode Generate(int codeLength);
 }

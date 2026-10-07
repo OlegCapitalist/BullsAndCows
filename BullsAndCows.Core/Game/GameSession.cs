@@ -22,15 +22,6 @@ public class GameSession : IGameSession
                                 or GameStatus.Lost
                                 or GameStatus.GaveUp;
 
-    public GameSession(SecretCode secretCode)
-    {
-        SecretCode = secretCode;
-        _guessEvaluator = new GuessEvaluator();
-        _settings = new GameSettings(4, 10);
-
-        Status = GameStatus.InProgress;
-    }
-
     public GameSession(
         SecretCode secretCode,
         GameSettings settings,
@@ -54,7 +45,7 @@ public class GameSession : IGameSession
             DateTime.Now)
         );
 
-        if (result.IsCorrect)
+        if (result.Bulls == SecretCode.Value.Length)
         {
             Status = GameStatus.Won;
         }

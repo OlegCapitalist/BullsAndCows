@@ -16,7 +16,7 @@ public class GameEngine : IGameEngine
 
     public IGameSession StartNewGame(GameSettings settings)
     {
-        var secretCode = _secretCodeGenerator.Generate();
+        var secretCode = _secretCodeGenerator.Generate(settings.CodeLength);
 
         return new GameSession(secretCode, settings, _guessEvaluator);
     }
