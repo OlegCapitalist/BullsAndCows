@@ -37,11 +37,11 @@ public partial class HomePage : ContentPage
         await Shell.Current.GoToAsync("//SettingsPage");
     }
 
-	private async void Button_Clicked(object sender, EventArgs e)
-	{
-        // Records / leaderboard — not implemented, show placeholder page
-        await DisplayAlert("Настройки", "Страница настроек пока не реализована.", "ОК");
-    }
+	//private async void Button_Clicked(object sender, EventArgs e)
+	//{
+ //       // Records / leaderboard — not implemented, show placeholder page
+ //       await DisplayAlert("Настройки", "Страница настроек пока не реализована.", "ОК");
+ //   }
 
     private async void OnRecordsClicked(object sender, EventArgs e)
     {

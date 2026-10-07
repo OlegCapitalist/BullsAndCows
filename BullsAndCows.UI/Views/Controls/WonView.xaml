@@ -17,5 +17,10 @@
                Aspect="AspectFit"
                HorizontalOptions="Center"
                VerticalOptions="Center" />
+        <Button Text="Рекорды" 
+                Clicked="OnRecordsClicked"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0,10" />
     </VerticalStackLayout>
 </ContentView>

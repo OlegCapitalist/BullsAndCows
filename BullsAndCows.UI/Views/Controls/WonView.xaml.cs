@@ -6,4 +6,9 @@ public partial class WonView : ContentView
 	{
 		InitializeComponent();
 	}
+
+    private async void OnRecordsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(RecordsPage));
+    }
 }

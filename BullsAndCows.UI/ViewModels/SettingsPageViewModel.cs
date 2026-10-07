@@ -27,10 +27,11 @@ public class SettingsPageViewModel
         { "Theme_Dark", "Темная" }
     };
 
-    public int CodeLength { get; set; } = 4;
+    public int CodeLength { get; set; }
 
-    public int MaxAttempts { get; set; } = 10;
+    public int MaxAttempts { get; set; }
 
+    
     public int SelectedThemeIndex
     { 
         get => Array.IndexOf(Enum.GetValues(typeof(Themes)), SelectedTheme);

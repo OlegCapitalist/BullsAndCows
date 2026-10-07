@@ -1,9 +1,10 @@
-﻿using BullsAndCows.Application.Interfaces;
+﻿using BullsAndCows.Application.DTOs;
+using BullsAndCows.Application.Interfaces;
+using BullsAndCows.Application.Models;
 using BullsAndCows.UI.Models;
 using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using BullsAndCows.Application.DTOs;
 
 namespace BullsAndCows.UI.ViewModels;
 
@@ -12,6 +13,8 @@ public class GamePageViewModel
 {
     private readonly IGameAppService _gameAppService = null!;
     private readonly ISettingsService _settingsService = null!;
+    private readonly IGameRecordRepository _repository = null!;
+    private int _codeLength;
 
     public string SecretCode { get; set; } = "";
     public string Guess { get; set; } = "";
@@ -34,25 +37,31 @@ public class GamePageViewModel
 
     public ICommand ClearCommand => new Command(Clear);
 
-    public ICommand CheckGuessCommand => new Command(CheckGuess);
+    public ICommand CheckGuessCommand => new Command(async () => await CheckGuessAsync());
 
     #endregion
 
-    public GamePageViewModel(IGameAppService gameAppService, ISettingsService settingsService)
+    public GamePageViewModel(
+        IGameAppService gameAppService, 
+        ISettingsService settingsService, 
+        IGameRecordRepository repository)
     {
         _gameAppService = gameAppService;
         _settingsService = settingsService;
+        _repository = repository;
     }
 
     public async Task StartGameAsync()
     {
         var settings = await _settingsService.GetSettingsAsync();
 
+        _codeLength = settings.CodeLength;
+
         var result = _gameAppService.StartGame(
             new StartGameRequest(
-                settings.CodeLength,
+                _codeLength,
                 settings.MaxAttempts));
-
+        
         SecretCode = "";
         Attempts.Clear();
 
@@ -61,7 +70,7 @@ public class GamePageViewModel
 
     private void AddDigit(string num)
     {
-        if (string.IsNullOrEmpty(num) || Guess.Length >= 4)
+        if (string.IsNullOrEmpty(num) || Guess.Length >= _codeLength)
             return;
 
         Guess += num;
@@ -80,7 +89,7 @@ public class GamePageViewModel
         Guess = "";
     }
 
-    private void CheckGuess()
+    private async Task CheckGuessAsync()
     {
         if (string.IsNullOrEmpty(Guess))
             return;
@@ -95,13 +104,23 @@ public class GamePageViewModel
         Status = result.Status;
         SecretCode = Status is GameStatusDto.Lost ? _gameAppService.SecretCode : "";
 
+        if (Status is GameStatusDto.Won)
+        {
+            await SaveRecordsAsync();
+        }
+
         Guess = "";
     }
 
     private async Task SaveRecordsAsync()
     {
-        // Implementation for saving records
-        await Task.CompletedTask;
+        await _repository.AddAsync(
+        new GameRecord
+        {
+            CodeLength = _codeLength,
+            AttemptsCount = Attempts.Count,
+            PlayedAt = DateTime.Now
+        });
     }
 
 }

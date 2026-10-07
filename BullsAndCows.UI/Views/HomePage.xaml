@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BullsAndCows.UI.Views.HomePage"
-             Title="Быки и Коровы">
+             x:Class="BullsAndCows.UI.Views.HomePage" 
+             >
+    <Shell.TitleView>
+        <Grid>
+            <Label
+                Text="Быки и Коровы"
+                FontSize="30"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Grid>
+    </Shell.TitleView>
+    
     <VerticalStackLayout Spacing="20">
         <Label 
             Text="Добро пожаловать в игру Bulls and Cows!"
@@ -21,22 +32,22 @@
                 Text="Начать игру" 
                 Clicked="OnStartGameClicked"
                 VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+                HorizontalOptions="Fill" />
             <Button 
                 Text="⚙Настройки" 
                 Clicked="OnSettingsClicked"
                 VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+                HorizontalOptions="Fill" />
             <Button 
                 Text="Рекорды" 
                 Clicked="OnRecordsClicked"
                 VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+                HorizontalOptions="Fill" />
             <Button 
                 Text="Правила" 
                 Clicked="OnHelpClicked"
                 VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
 
         <VerticalStackLayout IsVisible="{Binding IsLoadingVisible}" 

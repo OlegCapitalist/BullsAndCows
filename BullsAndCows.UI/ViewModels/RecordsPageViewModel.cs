@@ -5,6 +5,7 @@ using BullsAndCows.Infrastructure.Repositories;
 using BullsAndCows.UI.Models;
 using PropertyChanged;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace BullsAndCows.UI.ViewModels;
 
@@ -20,6 +21,8 @@ public class RecordsPageViewModel
     public int SelectedCodeLength { get; set; }
 
     public ObservableCollection<RecordItem> Records { get; private set; } = new();
+
+    public ICommand ClearRecordsCommand => new Command(async () => await ClearRecordsAsync());
 
     public RecordsPageViewModel(IGameRecordRepository repository, ISettingsService settingsService)
     {
@@ -62,5 +65,11 @@ public class RecordsPageViewModel
     {
         AvailableCodeLengths = await _repository.GetAvailableCodeLengthsAsync();
 
+    }
+
+    private async Task ClearRecordsAsync()
+    {
+        await _repository.ClearAsync();
+        await LoadRecordsAsync();
     }
 }

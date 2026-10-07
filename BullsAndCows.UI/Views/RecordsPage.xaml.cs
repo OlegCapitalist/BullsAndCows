@@ -23,4 +23,10 @@ public partial class RecordsPage : ContentPage
     {
         await Shell.Current.GoToAsync("..");
     }
+
+    private async void OnCodeLengthChanged(object sender, EventArgs e)
+    {
+        await ViewModel.LoadRecordsAsync();
+    }
+
 }
