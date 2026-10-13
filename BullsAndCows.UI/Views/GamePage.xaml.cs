@@ -38,22 +38,4 @@ public partial class GamePage : ContentPage
         PortraitLayout.IsVisible = !isLandscape;
         LandscapeLayout.IsVisible = isLandscape;
     }
-
-    private void OnNewGameClicked(object? sender, EventArgs e)
-    {
-        // Implementation for new game clicked
-    }
-
-    private void OnExitClicked(object? sender, EventArgs e)
-    {
-        // Implementation for exit clicked
-    }
-
-    private void OnRulesClicked(object? sender, EventArgs e)
-    {
-        // Implementation for exit clicked
-    }
-
-
-    
 }

@@ -30,7 +30,7 @@
                    VerticalOptions="Center" />
             
             <Label Grid.Row="1" Grid.Column="0"
-                   Text="Длина кода"
+                   Text="Длина кода:"
                    HorizontalOptions="Start"
                    VerticalOptions="Center" />
             <Entry Grid.Row="1" Grid.Column="1"

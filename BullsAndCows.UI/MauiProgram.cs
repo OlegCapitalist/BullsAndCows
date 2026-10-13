@@ -46,6 +46,8 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<IGameRecordRepository, Repository>();
 
+        builder.Services.AddSingleton<ILocalizationService, LocalizationService>();
+
         builder.Services.AddTransient<GamePageViewModel>();
         builder.Services.AddTransient<GamePage>();
 
