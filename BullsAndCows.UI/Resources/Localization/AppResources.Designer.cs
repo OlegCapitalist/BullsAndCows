@@ -88,6 +88,15 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Проверить.
+        /// </summary>
+        internal static string Check {
+            get {
+                return ResourceManager.GetString("Check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Очистить рекорды.
         /// </summary>
         internal static string ClearRecords {
@@ -129,6 +138,33 @@ namespace BullsAndCows.UI.Resources.Localization {
         internal static string Date {
             get {
                 return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выход.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ИГРА ОКОНЧЕНА.
+        /// </summary>
+        internal static string GameOver {
+            get {
+                return ResourceManager.GetString("GameOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Правила игры.
+        /// </summary>
+        internal static string GamesRules {
+            get {
+                return ResourceManager.GetString("GamesRules", resourceCulture);
             }
         }
         
@@ -192,6 +228,15 @@ namespace BullsAndCows.UI.Resources.Localization {
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загаданный код был:.
+        /// </summary>
+        internal static string SecretCodeWas {
+            get {
+                return ResourceManager.GetString("SecretCodeWas", resourceCulture);
             }
         }
         

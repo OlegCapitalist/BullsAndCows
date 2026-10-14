@@ -12,12 +12,10 @@
                 Clicked="OnNewGameClicked" />
         <Button Grid.Column="1"
                 Text="Выход"
-                SemanticProperties.Hint="Выход из игры"
                 HorizontalOptions="Fill" 
                 Clicked="OnExitClicked" />
         <Button Grid.Column="2"
                 Text="Правила"
-                SemanticProperties.Hint="Показать правила игры"
                 HorizontalOptions="Fill" 
                 Clicked="OnHelpClicked" />
     </Grid>

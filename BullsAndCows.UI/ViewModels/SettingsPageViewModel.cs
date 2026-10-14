@@ -50,9 +50,14 @@ public class SettingsPageViewModel
         }
     }
 
-    public IReadOnlyList<SelectionItem<Themes>> AvailableThemes { get; }
+    public IReadOnlyList<SelectionItem<Themes>> AvailableThemes { get; set; } = [];
 
-    public IReadOnlyList<SelectionItem<Languages>> AvailableLanguages { get; } 
+    public IReadOnlyList<SelectionItem<Languages>> AvailableLanguages { get; set; } = [
+            new(Languages.English, "English"),
+            new(Languages.Russian, "Русский"),
+            new(Languages.QazaqCyrillic, "Қазақша"),
+            new(Languages.QazaqLatin, "Qazaqşa")
+        ];
 
     public Themes SelectedTheme { get; set; }
 
@@ -72,25 +77,27 @@ public class SettingsPageViewModel
         _oldLanguage = _localizationService.CurrentLanguage;
 
         SaveSettingsCommand = new Command(async () => await SaveSettingsAsync());
-
-        AvailableLanguages = GetAvailableLanguages();
-        AvailableThemes = GetAvailableThemes();
     }   
 
     public async Task LoadSettingsAsync()
     {
         var settings = await _settingsService.GetSettingsAsync();
+
         CodeLength = settings.CodeLength;
         MaxAttempts = settings.MaxAttempts;
 
-        SelectedTheme = Enum.Parse<Themes>(settings.Theme, true);
-        SelectedLanguage = Enum.Parse<Languages>(settings.Language, true);
+        var selectedTheme = Enum.Parse<Themes>(settings.Theme, true);
+        var selectedLanguage = Enum.Parse<Languages>(settings.Language, true);
+
+        //if (SelectedLanguage != _oldLanguage)
+            _localizationService.Apply(selectedLanguage);
 
         if (SelectedTheme != _oldTheme)
-            _themeService.Apply(SelectedTheme);
-
-        if (SelectedLanguage != _oldLanguage)
-            _localizationService.Apply(SelectedLanguage);
+            _themeService.Apply(selectedTheme);
+        
+        AvailableThemes = GetAvailableThemes();
+        SelectedTheme = selectedTheme;
+        SelectedLanguage = selectedLanguage;
     }
 
     private async Task SaveSettingsAsync()
@@ -108,40 +115,26 @@ public class SettingsPageViewModel
         await Shell.Current.GoToAsync("//HomePage");
     }
 
-    private static IReadOnlyList<SelectionItem<Languages>> GetAvailableLanguages()
-    {
-        var _settingsMock = new Dictionary<string, string>
-        {
-            { "Language_English", "English" },
-            { "Language_Russian", "Русский" },
-            { "Language_QazaqCyrillic", "Қазақша" },
-            { "Language_QazaqLatin", "Qazaqşa" }
-        };
-
-        return [
-            new(Languages.English, _settingsMock["Language_English"]),
-            new(Languages.Russian, _settingsMock["Language_Russian"]),
-            new(Languages.QazaqCyrillic, _settingsMock["Language_QazaqCyrillic"]),
-            new(Languages.QazaqLatin, _settingsMock["Language_QazaqLatin"])
-        ];
-    }
     private static IReadOnlyList<SelectionItem<Themes>> GetAvailableThemes()
     {
-        return Enum.GetValues<Themes>()
+        var themes = Enum.GetValues<Themes>()
             .Select(theme => new SelectionItem<Themes>(
                 theme,
                 GetThemeName(theme)))
             .ToArray();
+
+        return themes;
     }
 
     private static string GetThemeName(Themes theme)
     {
-        return theme switch
+        var name = theme switch
         {
             Themes.System => AppResources.Theme_System,
             Themes.Light => AppResources.Theme_Light,
             Themes.Dark => AppResources.Theme_Dark,
             _ => theme.ToString()
         };
+        return name;
     }
 }
