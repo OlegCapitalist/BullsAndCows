@@ -61,8 +61,9 @@
             <Picker Grid.Row="3" Grid.Column="1"
                     ItemsSource="{Binding AvailableThemes}"
                     ItemDisplayBinding="{Binding DisplayName}"
-                    SelectedIndex="{Binding SelectedThemeIndex}"
+                    SelectedItem="{Binding SelectedThemeItem}"
                     HorizontalOptions="Fill" />
+            <!--SelectedIndex="{Binding SelectedThemeIndex}"-->
             
             <Label Grid.Row="4" Grid.Column="0"
                    Text="Язык:"
@@ -71,8 +72,9 @@
             <Picker Grid.Row="4" Grid.Column="1"
                     ItemsSource="{Binding AvailableLanguages}"
                     ItemDisplayBinding="{Binding DisplayName}"
-                    SelectedIndex ="{Binding SelectedLanguageIndex}"
+                    SelectedItem="{Binding SelectedLanguageItem}"
                     HorizontalOptions="Fill" />
+            <!--SelectedIndex ="{Binding SelectedLanguageIndex}"-->
             
             
             <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"

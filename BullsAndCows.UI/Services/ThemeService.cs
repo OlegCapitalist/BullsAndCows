@@ -21,7 +21,6 @@ public class ThemeService : IThemeService
             Themes.System => AppTheme.Unspecified,
             _ => AppTheme.Unspecified
         };
-
     }
 
 }

@@ -21,34 +21,60 @@ public class SettingsPageViewModel
     private Themes _oldTheme;
     private Languages _oldLanguage;
 
+    private SelectionItem<Themes>? _selectedThemeItem;
+    private SelectionItem<Languages>? _selectedLanguageItem;
+
     public int CodeLength { get; set; }
 
     public int MaxAttempts { get; set; }
 
     
-    public int SelectedThemeIndex
-    { 
-        get => Array.IndexOf(Enum.GetValues(typeof(Themes)), SelectedTheme);
-        set
-        {
-            var values = Enum.GetValues<Themes>();
-
-            if (value >= 0 && value < values.Length)
-                SelectedTheme = values[value];
-        }
-    }
-
-    public int SelectedLanguageIndex
+    public SelectionItem<Themes>? SelectedThemeItem
     {
-        get => Array.IndexOf(Enum.GetValues(typeof(Languages)), SelectedLanguage);
+        get { return _selectedThemeItem; }
         set
         {
-            var values = Enum.GetValues<Languages>();
+            _selectedThemeItem = value;
 
-            if (value >= 0 && value < values.Length)
-                SelectedLanguage = values[value];
+            if (value is not null)
+                SelectedTheme = value.Value;
         }
     }
+
+    public SelectionItem<Languages>? SelectedLanguageItem
+    {
+        get { return _selectedLanguageItem; }
+        set
+        {
+            _selectedLanguageItem = value;
+            if (value is not null)
+                SelectedLanguage = value.Value;
+        }
+    }
+
+    //public int SelectedThemeIndex
+    //{ 
+    //    get => Array.IndexOf(Enum.GetValues(typeof(Themes)), SelectedTheme);
+    //    set
+    //    {
+    //        var values = Enum.GetValues<Themes>();
+
+    //        if (value >= 0 && value < values.Length)
+    //            SelectedTheme = values[value];
+    //    }
+    //}
+
+    //public int SelectedLanguageIndex
+    //{
+    //    get => Array.IndexOf(Enum.GetValues(typeof(Languages)), SelectedLanguage);
+    //    set
+    //    {
+    //        var values = Enum.GetValues<Languages>();
+
+    //        if (value >= 0 && value < values.Length)
+    //            SelectedLanguage = values[value];
+    //    }
+    //}
 
     public IReadOnlyList<SelectionItem<Themes>> AvailableThemes { get; set; } = [];
 
@@ -89,15 +115,19 @@ public class SettingsPageViewModel
         var selectedTheme = Enum.Parse<Themes>(settings.Theme, true);
         var selectedLanguage = Enum.Parse<Languages>(settings.Language, true);
 
-        //if (SelectedLanguage != _oldLanguage)
+        if (_oldLanguage != selectedLanguage)
             _localizationService.Apply(selectedLanguage);
 
-        if (SelectedTheme != _oldTheme)
+        if (_oldTheme != selectedTheme)
             _themeService.Apply(selectedTheme);
-        
+
         AvailableThemes = GetAvailableThemes();
-        SelectedTheme = selectedTheme;
-        SelectedLanguage = selectedLanguage;
+
+        SelectedThemeItem = AvailableThemes.First(x => x.Value == selectedTheme);
+        SelectedLanguageItem = AvailableLanguages.First(x => x.Value == selectedLanguage);
+
+        _oldLanguage = selectedLanguage;
+        _oldTheme = selectedTheme;
     }
 
     private async Task SaveSettingsAsync()

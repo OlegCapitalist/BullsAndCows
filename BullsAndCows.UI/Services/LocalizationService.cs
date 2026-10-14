@@ -21,6 +21,9 @@ namespace BullsAndCows.UI.Services
 
             var culture = CultureInfo.GetCultureInfo(cultureName);
 
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             CultureInfo.CurrentCulture = culture;
             CultureInfo.CurrentUICulture = culture;
 
