@@ -10,6 +10,4 @@ public class GameSettings
         CodeLength = codeLength;
         MaxAttempts = maxAttempts;
     }
-
-    public static GameSettings Classic() => new(4, 10);
 }
