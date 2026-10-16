@@ -123,6 +123,9 @@
   <data name="AttemptsCount" xml:space="preserve">
     <value>Количество попыток:</value>
   </data>
+  <data name="AttemptsUsed" xml:space="preserve">
+    <value>Затрачено попыток: {0}</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Назад</value>
   </data>
@@ -134,9 +137,6 @@
   </data>
   <data name="CodeLength" xml:space="preserve">
     <value>Длина кода:</value>
-  </data>
-  <data name="Congrat" xml:space="preserve">
-    <value>ПРАВИЛЬНО!!!</value>
   </data>
   <data name="CowAndBulls" xml:space="preserve">
     <value>Быки и Коровы</value>
@@ -150,7 +150,7 @@
   <data name="GameOver" xml:space="preserve">
     <value>ИГРА ОКОНЧЕНА</value>
   </data>
-  <data name="GamesRules" xml:space="preserve">
+  <data name="GameRules" xml:space="preserve">
     <value>Правила игры</value>
   </data>
   <data name="Language" xml:space="preserve">
@@ -162,8 +162,8 @@
   <data name="NewGame" xml:space="preserve">
     <value>Новая игра</value>
   </data>
-  <data name="Options" xml:space="preserve">
-    <value>Настройки</value>
+  <data name="Settings" xml:space="preserve">
+    <value>⚙Настройки</value>
   </data>
   <data name="Records" xml:space="preserve">
     <value>Рекорды</value>
@@ -194,5 +194,20 @@
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Добро пожаловать в игру Быки и Коровы!</value>
+  </data>
+  <data name="Congratulations" xml:space="preserve">
+    <value>🎉 ПРАВИЛЬНО!!! 🎉</value>
+  </data>
+  <data name="NoAttempts" xml:space="preserve">
+    <value>Попыток пока нет</value>
+  </data>
+  <data name="NewGameConfirmation" xml:space="preserve">
+    <value>Вы действительно хотите начать новую игру?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
   </data>
 </root>

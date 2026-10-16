@@ -79,11 +79,29 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Затрачено попыток: {0}.
+        /// </summary>
+        internal static string AttemptsUsed {
+            get {
+                return ResourceManager.GetString("AttemptsUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Назад.
         /// </summary>
         internal static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отмена.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -115,11 +133,11 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ПРАВИЛЬНО!!!.
+        ///   Looks up a localized string similar to 🎉 ПРАВИЛЬНО!!! 🎉.
         /// </summary>
-        internal static string Congrat {
+        internal static string Congratulations {
             get {
-                return ResourceManager.GetString("Congrat", resourceCulture);
+                return ResourceManager.GetString("Congratulations", resourceCulture);
             }
         }
         
@@ -162,9 +180,9 @@ namespace BullsAndCows.UI.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Правила игры.
         /// </summary>
-        internal static string GamesRules {
+        internal static string GameRules {
             get {
-                return ResourceManager.GetString("GamesRules", resourceCulture);
+                return ResourceManager.GetString("GameRules", resourceCulture);
             }
         }
         
@@ -196,11 +214,20 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Настройки.
+        ///   Looks up a localized string similar to Вы действительно хотите начать новую игру?.
         /// </summary>
-        internal static string Options {
+        internal static string NewGameConfirmation {
             get {
-                return ResourceManager.GetString("Options", resourceCulture);
+                return ResourceManager.GetString("NewGameConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Попыток пока нет.
+        /// </summary>
+        internal static string NoAttempts {
+            get {
+                return ResourceManager.GetString("NoAttempts", resourceCulture);
             }
         }
         
@@ -237,6 +264,15 @@ namespace BullsAndCows.UI.Resources.Localization {
         internal static string SecretCodeWas {
             get {
                 return ResourceManager.GetString("SecretCodeWas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⚙Настройки.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         
@@ -291,6 +327,15 @@ namespace BullsAndCows.UI.Resources.Localization {
         internal static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Да.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

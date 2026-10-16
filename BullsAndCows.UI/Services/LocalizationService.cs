@@ -1,6 +1,7 @@
 ﻿using BullsAndCows.UI.Interfaces;
 using BullsAndCows.UI.Models;
 using System.Globalization;
+using BullsAndCows.UI.Resources.Localization;
 
 namespace BullsAndCows.UI.Services
 {
@@ -26,6 +27,8 @@ namespace BullsAndCows.UI.Services
 
             CultureInfo.CurrentCulture = culture;
             CultureInfo.CurrentUICulture = culture;
+
+            var test = AppResources.Theme_System;
 
             CurrentLanguage = language;
         }
