@@ -2,6 +2,7 @@
 using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Application.Models;
 using BullsAndCows.UI.Models;
+using BullsAndCows.UI.Interfaces;
 using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -14,6 +15,7 @@ public class GamePageViewModel
     private readonly IGameAppService _gameAppService = null!;
     private readonly ISettingsService _settingsService = null!;
     private readonly IGameRecordRepository _repository = null!;
+    private readonly ILocalizationService _localizationService = null!;
     private int _codeLength;
 
     public string SecretCode { get; set; } = "";
@@ -44,11 +46,13 @@ public class GamePageViewModel
     public GamePageViewModel(
         IGameAppService gameAppService, 
         ISettingsService settingsService, 
-        IGameRecordRepository repository)
+        IGameRecordRepository repository,
+        ILocalizationService localizationService)
     {
         _gameAppService = gameAppService;
         _settingsService = settingsService;
         _repository = repository;
+        _localizationService = localizationService;
     }
 
     public async Task StartGameAsync()

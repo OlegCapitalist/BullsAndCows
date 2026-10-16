@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BullsAndCows.UI.Views.RecordsPage" >
+             x:Class="BullsAndCows.UI.Views.RecordsPage"
+             xmlns:localization="clr-namespace:BullsAndCows.UI.Resources.Localization" >
     <Shell.TitleView>
         <Grid>
             <Label
-                Text="Рекорды"
+                Text="{x:Static localization:AppResources.Records}"
                 FontSize="30"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
@@ -16,7 +17,7 @@
         <Grid Grid.Row="0" 
               ColumnDefinitions="Auto,*">
             <Label Grid.Column="0"
-               Text="Длина кода:"
+               Text="{x:Static localization:AppResources.CodeLength}"
                FontAttributes="Bold"
                HorizontalOptions="Start"
                VerticalOptions="Center"
@@ -38,12 +39,12 @@
                    HorizontalTextAlignment="Center" />
 
             <Label Grid.Column="1"
-                   Text="Попытки"
+                   Text="{x:Static localization:AppResources.Attempts}"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center" />
 
             <Label Grid.Column="2"
-                   Text="Дата"
+                   Text="{x:Static localization:AppResources.Date}"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center" />
         </Grid>
@@ -86,13 +87,13 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <Button Grid.Row="3"
-                Text="Очистить рекорды"
+                Text="{x:Static localization:AppResources.ClearRecords}"
                 Command="{Binding ClearRecordsCommand}"
                 HorizontalOptions="Fill"
                 VerticalOptions="Center"
                 Margin="10,10"/>
         <Button Grid.Row="4"
-                Text="Назад" 
+                Text="{x:Static localization:AppResources.Back}"
                 Clicked="OnBackClicked"
                 HorizontalOptions="Fill" 
                 VerticalOptions="Center" 

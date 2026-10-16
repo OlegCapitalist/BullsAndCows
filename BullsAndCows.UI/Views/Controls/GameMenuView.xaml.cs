@@ -1,4 +1,5 @@
 using BullsAndCows.UI.ViewModels;
+using BullsAndCows.UI.Resources.Localization;
 
 namespace BullsAndCows.UI.Views.Controls;
 
@@ -11,11 +12,11 @@ public partial class GameMenuView : ContentView
 
     private async void OnNewGameClicked(object? sender, EventArgs e)
     {
-        bool confirmed = await Shell.Current.DisplayAlert(
-            "Новая игра",
-            "Текущая игра будет завершена. Начать новую игру?",
-            "Да",
-            "Отмена");
+        bool confirmed = await Shell.Current.DisplayAlertAsync(
+            AppResources.NewGame,
+            AppResources.NewGameConfirmation,
+            AppResources.Yes,
+            AppResources.Cancel);
 
         if (!confirmed)
             return;

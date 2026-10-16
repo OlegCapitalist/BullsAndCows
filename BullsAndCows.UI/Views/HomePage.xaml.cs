@@ -1,30 +1,12 @@
-using BullsAndCows.UI.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace BullsAndCows.UI.Views;
 
 public partial class HomePage : ContentPage
 {
-    private bool _initialized;
-    private HomePageViewModel ViewModel =>
-        (HomePageViewModel)BindingContext;
-    public HomePage(HomePageViewModel viewModel)
+    public HomePage()
 	{
 		InitializeComponent();
 
-        BindingContext = viewModel;
-    }
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (_initialized)
-            return;
-
-        _initialized = true;
-
-        await ViewModel.InitializeAsync();
     }
 
     private async void OnStartGameClicked(object sender, EventArgs e)

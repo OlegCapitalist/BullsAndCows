@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BullsAndCows.UI.Views.HomePage" 
-             >
+             xmlns:localization="clr-namespace:BullsAndCows.UI.Resources.Localization">
     <Shell.TitleView>
         <Grid>
             <Label
-                Text="Быки и Коровы"
+                Text="{x:Static localization:AppResources.CowAndBulls}"
                 FontSize="30"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
@@ -16,7 +16,7 @@
     
     <VerticalStackLayout Spacing="20">
         <Label 
-            Text="Добро пожаловать в игру Bulls and Cows!"
+            Text="{x:Static localization:AppResources.Welcome}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Image Source="home.png"
@@ -24,45 +24,30 @@
                HorizontalOptions="Center"
                VerticalOptions="Center" />
 
-        <VerticalStackLayout IsVisible="{Binding IsMenuVisible}" 
-                             VerticalOptions="Center"
+        <VerticalStackLayout VerticalOptions="Center"
                              HorizontalOptions="Center"
                              Spacing="20" >
             <Button 
-                Text="Начать игру" 
+                Text="{x:Static localization:AppResources.StartGame}" 
                 Clicked="OnStartGameClicked"
                 VerticalOptions="Center" 
                 HorizontalOptions="Fill" />
             <Button 
-                Text="⚙Настройки" 
+                Text="{x:Static localization:AppResources.Settings}" 
                 Clicked="OnSettingsClicked"
                 VerticalOptions="Center" 
                 HorizontalOptions="Fill" />
             <Button 
-                Text="Рекорды" 
+                Text="{x:Static localization:AppResources.Records}" 
                 Clicked="OnRecordsClicked"
                 VerticalOptions="Center" 
                 HorizontalOptions="Fill" />
             <Button 
-                Text="Правила" 
+                Text="{x:Static localization:AppResources.Rules}" 
                 Clicked="OnHelpClicked"
                 VerticalOptions="Center" 
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>
 
-        <VerticalStackLayout IsVisible="{Binding IsLoadingVisible}" 
-                             VerticalOptions="Center"
-                             HorizontalOptions="Center"
-                             Spacing ="20" >
-            <ActivityIndicator
-                IsRunning="True"
-                WidthRequest="48"
-                HeightRequest="48" />
-            <Label
-                Text="Загрузка..."
-                FontSize="18"
-                HorizontalTextAlignment="Center" />
-        </VerticalStackLayout>
-        
     </VerticalStackLayout>
 </ContentPage>

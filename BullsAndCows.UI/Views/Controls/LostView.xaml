@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BullsAndCows.UI.Views.Controls.LostView">
+             x:Class="BullsAndCows.UI.Views.Controls.LostView"
+             xmlns:localization="clr-namespace:BullsAndCows.UI.Resources.Localization" >
     <VerticalStackLayout IsVisible="{Binding IsLost}">
         <Label 
-            Text="ИГРА ОКОНЧЕНА"
+            Text="{x:Static localization:AppResources.GameOver}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Label 
-            Text="Загаданный код был:"
+            Text="{x:Static localization:AppResources.SecretCodeWas}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Label 
@@ -19,7 +20,7 @@
                Aspect="AspectFit"
                HorizontalOptions="Center"
                VerticalOptions="Center" />
-        <Button Text="Рекорды"
+        <Button Text="{x:Static localization:AppResources.Records}"
                 Clicked="OnRecordsClicked"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 

@@ -27,7 +27,6 @@ public class SettingsPageViewModel
     public int CodeLength { get; set; }
 
     public int MaxAttempts { get; set; }
-
     
     public SelectionItem<Themes>? SelectedThemeItem
     {
@@ -51,30 +50,6 @@ public class SettingsPageViewModel
                 SelectedLanguage = value.Value;
         }
     }
-
-    //public int SelectedThemeIndex
-    //{ 
-    //    get => Array.IndexOf(Enum.GetValues(typeof(Themes)), SelectedTheme);
-    //    set
-    //    {
-    //        var values = Enum.GetValues<Themes>();
-
-    //        if (value >= 0 && value < values.Length)
-    //            SelectedTheme = values[value];
-    //    }
-    //}
-
-    //public int SelectedLanguageIndex
-    //{
-    //    get => Array.IndexOf(Enum.GetValues(typeof(Languages)), SelectedLanguage);
-    //    set
-    //    {
-    //        var values = Enum.GetValues<Languages>();
-
-    //        if (value >= 0 && value < values.Length)
-    //            SelectedLanguage = values[value];
-    //    }
-    //}
 
     public IReadOnlyList<SelectionItem<Themes>> AvailableThemes { get; set; } = [];
 
@@ -132,15 +107,26 @@ public class SettingsPageViewModel
 
     private async Task SaveSettingsAsync()
     {
-        if (SelectedTheme != _oldTheme)
-            _themeService.Apply(SelectedTheme);
-
         if (SelectedLanguage != _oldLanguage)
             _localizationService.Apply(SelectedLanguage);
+
+        if (SelectedTheme != _oldTheme)
+            _themeService.Apply(SelectedTheme);
 
         await _settingsService.SaveSettingsAsync(
             new UserSettings(CodeLength, MaxAttempts, SelectedTheme.ToString(), SelectedLanguage.ToString())
         );
+
+        if (_oldLanguage != SelectedLanguage)
+        {
+            var window = MauiApplication.Current?.Windows.FirstOrDefault();
+
+            if (window is not null)
+                window.Page = new AppShell();
+        }
+
+        _oldLanguage = SelectedLanguage;
+        _oldTheme = SelectedTheme;
 
         await Shell.Current.GoToAsync("//HomePage");
     }
