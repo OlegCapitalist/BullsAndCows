@@ -10,4 +10,7 @@
       <Deploy Solution="Debug|*" />
     </Project>
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="BullsAndCows.Core.Tests/BullsAndCows.Core.Tests.csproj" Id="f51b2482-f876-49d5-82ac-eeee07f6bba6" />
+  </Folder>
 </Solution>
