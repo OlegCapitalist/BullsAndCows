@@ -15,8 +15,8 @@ namespace BullsAndCows.UI.Services
             {
                 Languages.Russian => "ru",
                 Languages.English => "en",
-                Languages.QazaqCyrillic => "kk-Cyrl",
-                Languages.QazaqLatin => "kk-Latn",
+                Languages.QazaqCyrillic => "kk",
+                Languages.QazaqLatin => "kk-kz",
                 _ => "ru"
             };
 

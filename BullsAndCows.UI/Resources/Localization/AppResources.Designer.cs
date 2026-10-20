@@ -70,7 +70,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Количество попыток:.
+        ///   Looks up a localized string similar to ≡ Количество попыток:.
         /// </summary>
         internal static string AttemptsCount {
             get {
@@ -124,7 +124,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Длина кода:.
+        ///   Looks up a localized string similar to ⌗ Длина кода:.
         /// </summary>
         internal static string CodeLength {
             get {
@@ -187,7 +187,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Язык:.
+        ///   Looks up a localized string similar to 🌐︎ Язык:.
         /// </summary>
         internal static string Language {
             get {
@@ -214,7 +214,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы действительно хотите начать новую игру?.
+        ///   Looks up a localized string similar to ⚠Вы действительно хотите начать новую игру?.
         /// </summary>
         internal static string NewGameConfirmation {
             get {
@@ -232,7 +232,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Рекорды.
+        ///   Looks up a localized string similar to ★ Рекорды.
         /// </summary>
         internal static string Records {
             get {
@@ -241,7 +241,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Правила.
+        ///   Looks up a localized string similar to ⓘ Правила.
         /// </summary>
         internal static string Rules {
             get {
@@ -268,7 +268,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ⚙Настройки.
+        ///   Looks up a localized string similar to ⛭ Настройки.
         /// </summary>
         internal static string Settings {
             get {
@@ -277,7 +277,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Начать игру.
+        ///   Looks up a localized string similar to ▷ Начать игру.
         /// </summary>
         internal static string StartGame {
             get {
@@ -286,7 +286,7 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Тема:.
+        ///   Looks up a localized string similar to ◐ Тема:.
         /// </summary>
         internal static string Theme {
             get {
