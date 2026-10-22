@@ -1,14 +1,10 @@
-﻿
-using AutoFixture;
-using FluentAssertions;
+﻿using FluentAssertions;
 using BullsAndCows.Core.Game;
-using Xunit;
 
 namespace BullsAndCows.Core.Tests.Game;
 
 public class SecretCodeGeneratorTests
 {
-    private readonly Fixture _fixture = new();
     private readonly SecretCodeGenerator _sut = new();
 
     public static IEnumerable<object[]> CodeLengths =>
