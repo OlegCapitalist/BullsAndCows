@@ -54,6 +54,9 @@ public static class MauiProgram
         builder.Services.AddTransient<SettingsPageViewModel>();
         builder.Services.AddTransient<SettingsPage>();
 
+        builder.Services.AddTransient<HelpPageViewModel>();
+        builder.Services.AddTransient<HelpPage>();
+
         builder.Services.AddTransient<RecordsPageViewModel>();
 
 #if DEBUG

@@ -210,4 +210,7 @@
   <data name="Cancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="HelpTextNotLoaded" xml:space="preserve">
+    <value>⚠Не удалось загрузить правила игры</value>
+  </data>
 </root>

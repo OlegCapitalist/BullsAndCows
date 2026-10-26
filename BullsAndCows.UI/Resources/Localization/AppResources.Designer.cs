@@ -187,6 +187,15 @@ namespace BullsAndCows.UI.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ⚠Не удалось загрузить правила игры.
+        /// </summary>
+        internal static string HelpTextNotLoaded {
+            get {
+                return ResourceManager.GetString("HelpTextNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🌐︎ Язык:.
         /// </summary>
         internal static string Language {

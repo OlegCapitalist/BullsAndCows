@@ -19,9 +19,15 @@
                HorizontalOptions="Center"
                VerticalOptions="Center" />
         <Label 
-            Text="Игра из себя представляет головоломку"
+            Text="{Binding HelpText}"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" 
+            IsVisible="{Binding IsHelpTextVisible}"/>
+        <Label 
+            Text="{x:Static localization:AppResources.HelpTextNotLoaded}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            IsVisible="{Binding IsLoadingErrorVisible}"/>
         <Button 
             Text="{x:Static localization:AppResources.Back}"
             Clicked="OnBackClicked"

@@ -210,4 +210,7 @@
   <data name="Cancel" xml:space="preserve">
     <value>Joq</value>
   </data>
+  <data name="HelpTextNotLoaded" xml:space="preserve">
+    <value>⚠ Failed to load game rules</value>
+  </data>
 </root>
