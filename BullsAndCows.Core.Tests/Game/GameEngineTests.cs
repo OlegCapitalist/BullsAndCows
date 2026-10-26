@@ -9,6 +9,20 @@ namespace BullsAndCows.Core.Tests.Game;
 
 public class GameEngineTests
 {
+    private readonly Mock<ISecretCodeGenerator> _generatorMock;
+    private readonly Mock<IGuessEvaluator> _evaluatorMock;
+    private readonly GameEngine _sut;
+
+    public GameEngineTests()
+    {
+        _generatorMock = new Mock<ISecretCodeGenerator>();
+        _evaluatorMock = new Mock<IGuessEvaluator>();
+
+        _sut = new GameEngine(
+            _generatorMock.Object,
+            _evaluatorMock.Object);
+    }
+
     [Theory]
     [InlineData(1, 5)]
     [InlineData(4, 10)]
@@ -20,22 +34,16 @@ public class GameEngineTests
         var settings = new GameSettings(codeLength, maxAttempts);
         var secretCode = new SecretCode(Enumerable.Range(0, codeLength).ToArray());
 
-        var generatorMock = new Mock<ISecretCodeGenerator>();
-        var evaluatorMock = new Mock<IGuessEvaluator>();
-
-        generatorMock
+        _generatorMock
             .Setup(x => x.Generate(settings.CodeLength))
             .Returns(secretCode);
 
-        var sut = new GameEngine(
-            generatorMock.Object,
-            evaluatorMock.Object);
 
         // Act
-        sut.StartNewGame(settings);
+        _sut.StartNewGame(settings);
 
         // Assert
-        generatorMock.Verify(
+        _generatorMock.Verify(
             x => x.Generate(settings.CodeLength),
             Times.Once);
     }
@@ -51,24 +59,18 @@ public class GameEngineTests
         var secretCode = new SecretCode(Enumerable.Range(0, codeLength).ToArray());
         var settings = new GameSettings(codeLength, maxAttempts);
 
-        var generatorMock = new Mock<ISecretCodeGenerator>();
-        var evaluatorMock = new Mock<IGuessEvaluator>();
-
-        generatorMock
+        _generatorMock
             .Setup(x => x.Generate(settings.CodeLength))
             .Returns(secretCode);
 
         var expected = new GameSession(
             secretCode,
             settings,
-            evaluatorMock.Object);
+            _evaluatorMock.Object);
 
-        var sut = new GameEngine(
-            generatorMock.Object,
-            evaluatorMock.Object);
 
         // Act
-        var actual = sut.StartNewGame(settings);
+        var actual = _sut.StartNewGame(settings);
 
         // Assert
         actual.Should().BeEquivalentTo(expected);
