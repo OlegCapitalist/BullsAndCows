@@ -1,5 +1,4 @@
-﻿using AutoFixture;
-using BullsAndCows.Core.Game;
+﻿using BullsAndCows.Core.Game;
 using BullsAndCows.Core.Interfaces;
 using BullsAndCows.Core.Models;
 using FluentAssertions;
