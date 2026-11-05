@@ -8,6 +8,5 @@ public record GuessResultDto(int AttemptNumber, string Guess, int Bulls, int Cow
 
     public bool IsFinished =>
         Status is GameStatusDto.Won
-            or GameStatusDto.Lost
-            or GameStatusDto.GaveUp;
+            or GameStatusDto.Lost;
 }

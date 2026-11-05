@@ -5,6 +5,5 @@ public enum GameStatusDto
     NotStarted,
     InProgress,
     Won,
-    Lost,
-    GaveUp
+    Lost
 }

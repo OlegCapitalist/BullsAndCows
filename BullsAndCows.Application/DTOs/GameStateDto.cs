@@ -10,8 +10,7 @@ public record GameStateDto(GameStatusDto Status, int CodeLength, int AttemptsCou
 
     public bool IsFinished =>
         Status is GameStatusDto.Won
-            or GameStatusDto.Lost
-            or GameStatusDto.GaveUp;
+            or GameStatusDto.Lost;
 
     public bool IsWin => Status == GameStatusDto.Won;
 }

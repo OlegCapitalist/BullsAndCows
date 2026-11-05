@@ -17,6 +17,4 @@ public interface IGameSession
     bool IsFinished { get; }
 
     GuessResult MakeGuess(Guess guess);
-
-    void GiveUp();
 }

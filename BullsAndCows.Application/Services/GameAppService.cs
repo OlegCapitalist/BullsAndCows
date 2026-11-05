@@ -58,15 +58,6 @@ public class GameAppService : IGameAppService
             MapGameStatusToGameStatusDto(_currentSession.Status)
         );
     }
-    public GameStateDto GiveUp()
-    {
-        if (_currentSession is null)
-            throw new InvalidOperationException("Game is not started.");
-
-        _currentSession.GiveUp();
-
-        return MapGameSessionToGameStateDto(_currentSession);
-    }
 
     public GameStateDto GetState()
     {
@@ -75,6 +66,7 @@ public class GameAppService : IGameAppService
 
         return MapGameSessionToGameStateDto(_currentSession);
     }
+
     private static GameStateDto MapGameSessionToGameStateDto(IGameSession session)
     {
         return new GameStateDto(
@@ -92,7 +84,6 @@ public class GameAppService : IGameAppService
             GameStatus.InProgress => GameStatusDto.InProgress,
             GameStatus.Won => GameStatusDto.Won,
             GameStatus.Lost => GameStatusDto.Lost,
-            GameStatus.GaveUp => GameStatusDto.GaveUp,
             _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
         };
     }

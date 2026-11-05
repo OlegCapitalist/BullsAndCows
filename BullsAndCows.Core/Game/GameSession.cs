@@ -19,8 +19,7 @@ public class GameSession : IGameSession
     public int AttemptsCount => _history.Count;
 
     public bool IsFinished => Status is GameStatus.Won
-                                or GameStatus.Lost
-                                or GameStatus.GaveUp;
+                                or GameStatus.Lost;
 
     public GameSession(
         SecretCode secretCode,
@@ -60,13 +59,4 @@ public class GameSession : IGameSession
 
         return result;
     }
-
-    public void GiveUp()
-    {
-        if (Status != GameStatus.InProgress)
-            return;
-
-        Status = GameStatus.GaveUp;
-    }
-
 }

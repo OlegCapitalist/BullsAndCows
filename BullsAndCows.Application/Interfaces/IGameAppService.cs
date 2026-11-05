@@ -10,7 +10,5 @@ public interface IGameAppService
 
     GuessResultDto MakeGuess(MakeGuessRequest request);
 
-    GameStateDto GiveUp();
-
     GameStateDto GetState();
 }
