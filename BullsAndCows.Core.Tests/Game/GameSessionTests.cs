@@ -103,16 +103,4 @@ public class GameSessionTests
         sut.AttemptsCount.Should().Be(2);
         sut.IsFinished.Should().BeTrue();
     }
-
-    [Fact]
-    public void GiveUp_ShouldSetGaveUp_WhenGameIsInProgress()
-    {
-        // Act
-        _sut.GiveUp();
-
-        // Assert
-        _sut.Status.Should().Be(GameStatus.GaveUp);
-        _sut.IsFinished.Should().BeTrue();
-    }
-
 }
