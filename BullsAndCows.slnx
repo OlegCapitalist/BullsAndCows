@@ -11,6 +11,7 @@
     </Project>
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="BullsAndCows.Application.Tests/BullsAndCows.Application.Tests.csproj" Id="9c7227ba-bca1-4a0e-b598-068d03d91721" />
     <Project Path="BullsAndCows.Core.Tests/BullsAndCows.Core.Tests.csproj" Id="f51b2482-f876-49d5-82ac-eeee07f6bba6" />
   </Folder>
 </Solution>
