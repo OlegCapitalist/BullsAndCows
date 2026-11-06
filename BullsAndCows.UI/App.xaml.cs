@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BullsAndCows.UI;
 
-public partial class App : MauiApplication
+public partial class App : MauiControlsApplication
 {
     private readonly ISettingsService _settingsService;
     private readonly IThemeService _themeService;

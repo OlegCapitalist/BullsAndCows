@@ -9,12 +9,12 @@ public class ThemeService : IThemeService
 
     public void Apply(Themes theme)
     {
-        if (MauiApplication.Current is null)
+        if (MauiControlsApplication.Current is null)
             return;
 
         CurrentTheme = theme;
 
-        MauiApplication.Current.UserAppTheme = theme switch
+        MauiControlsApplication.Current.UserAppTheme = theme switch
         {
             Themes.Light => AppTheme.Light,
             Themes.Dark => AppTheme.Dark,

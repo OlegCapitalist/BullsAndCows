@@ -119,7 +119,7 @@ public class SettingsPageViewModel
 
         if (_oldLanguage != SelectedLanguage)
         {
-            var window = MauiApplication.Current?.Windows.FirstOrDefault();
+            var window = MauiControlsApplication.Current?.Windows.FirstOrDefault();
 
             if (window is not null)
                 window.Page = new AppShell();
