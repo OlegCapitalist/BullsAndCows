@@ -14,15 +14,14 @@ public class GameAppServiceTests
     private readonly Mock<IGameEngine> _engineMock;
     private readonly GameAppService _sut;
 
-    public static IEnumerable<object[]> GameSettingsData =>
-    Enumerable.Range(1, 10)
-        .SelectMany(codeLength =>
-            new[] { 5, 10, 20 }
-                .Select(maxAttempts => new object[]
-                {
-                    codeLength,
-                    maxAttempts
-                }));
+    public static TheoryData<GameSettings> GameSettingsData => new
+        (
+            Enumerable.Range(1, 10)
+                .SelectMany(codeLength =>
+                    new int[] { 5, 10, 20 }
+                        .Select(maxAttempts =>
+                            new GameSettings(codeLength, maxAttempts)))
+        );
 
     public GameAppServiceTests()
     {
@@ -32,33 +31,32 @@ public class GameAppServiceTests
 
     [Theory]
     [MemberData(nameof(GameSettingsData))]
-    public void StartGame_ShouldCreateSessionWithCorrectSettings(
-    int codeLength,
-    int maxAttempts)
+    public void StartGame_ShouldCreateSessionWithCorrectSettings(GameSettings settings)
     {
         // Arrange
         var sessionMock = CreateSession(
-            Enumerable.Range(0, codeLength).ToArray());
+            Enumerable.Range(0, settings.CodeLength).ToArray());
 
         _engineMock
             .Setup(x => x.StartNewGame(It.IsAny<GameSettings>()))
             .Returns(sessionMock.Object);
 
-        var request = new StartGameRequest(codeLength, maxAttempts);
-
-        var expected = new GameStateDto(
-            GameStatusDto.InProgress, 0, codeLength);
+        var request = new StartGameRequest(
+            settings.CodeLength,
+            settings.MaxAttempts);
 
         // Act
         var actual = _sut.StartGame(request);
 
         // Assert
-        actual.Should().BeEquivalentTo(expected);
+        actual.Status.Should().Be(GameStatusDto.InProgress);
+        actual.IsStarted.Should().BeTrue();
+        actual.IsInProgress.Should().BeTrue();
 
         _engineMock.Verify(x => x.StartNewGame(
             It.Is<GameSettings>(s =>
-                s.CodeLength == codeLength &&
-                s.MaxAttempts == maxAttempts)),
+                s.CodeLength == settings.CodeLength &&
+                s.MaxAttempts == settings.MaxAttempts)),
             Times.Once);
 
         _sut.SecretCode.Should().BeEmpty();

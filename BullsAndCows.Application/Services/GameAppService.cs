@@ -69,8 +69,8 @@ public class GameAppService : IGameAppService
     {
         return new GameStateDto(
             MapGameStatusToGameStatusDto(session.Status),
-            session.AttemptsCount,
-            session.SecretCode.Value.Length
+            session.SecretCode.Value.Length,
+            session.AttemptsCount
         );
     }
 
