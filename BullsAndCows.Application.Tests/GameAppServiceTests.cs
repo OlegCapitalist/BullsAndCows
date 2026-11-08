@@ -31,7 +31,8 @@ public class GameAppServiceTests
 
     [Theory]
     [MemberData(nameof(GameSettingsData))]
-    public void StartGame_ShouldCreateSessionWithCorrectSettings(GameSettings settings)
+    public void StartGame_ShouldCreateSessionWithCorrectSettings(
+    GameSettings settings)
     {
         // Arrange
         var sessionMock = CreateSession(
@@ -45,13 +46,16 @@ public class GameAppServiceTests
             settings.CodeLength,
             settings.MaxAttempts);
 
+        var expected = new GameStateDto(
+            Status: GameStatusDto.InProgress,
+            CodeLength: settings.CodeLength,
+            AttemptsCount: 0);
+
         // Act
         var actual = _sut.StartGame(request);
 
         // Assert
-        actual.Status.Should().Be(GameStatusDto.InProgress);
-        actual.IsStarted.Should().BeTrue();
-        actual.IsInProgress.Should().BeTrue();
+        actual.Should().BeEquivalentTo(expected);
 
         _engineMock.Verify(x => x.StartNewGame(
             It.Is<GameSettings>(s =>
@@ -60,6 +64,65 @@ public class GameAppServiceTests
             Times.Once);
 
         _sut.SecretCode.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData("1245", 2, 1, GameStatus.InProgress, GameStatusDto.InProgress, "")]
+    [InlineData("1234", 4, 0, GameStatus.Won, GameStatusDto.Won, "")]
+    [InlineData("5678", 0, 0, GameStatus.Lost, GameStatusDto.Lost, "1234")]
+    public void MakeGuess_ShouldReturnCorrectResultAndRevealSecretOnlyOnLoss(
+        string guessValue,
+        int bulls,
+        int cows,
+        GameStatus resultingStatus,
+        GameStatusDto expectedStatus,
+        string expectedRevealedSecret)
+    {
+        // Arrange
+        var sessionMock = CreateSession([1, 2, 3, 4]);
+        var currentStatus = GameStatus.InProgress;
+        var attemptsCount = 0;
+
+        sessionMock.SetupGet(x => x.Status)
+            .Returns(() => currentStatus);
+        sessionMock.SetupGet(x => x.AttemptsCount)
+            .Returns(() => attemptsCount);
+
+        sessionMock
+            .Setup(x => x.MakeGuess(It.IsAny<Guess>()))
+            .Callback<Guess>(_ =>
+            {
+                attemptsCount++;
+                currentStatus = resultingStatus;
+            })
+            .Returns(new GuessResult(bulls, cows));
+
+        _engineMock
+            .Setup(x => x.StartNewGame(It.IsAny<GameSettings>()))
+            .Returns(sessionMock.Object);
+
+        _sut.StartGame(new StartGameRequest(4, resultingStatus == GameStatus.Lost ? 1 : 10));
+
+        var request = new MakeGuessRequest(guessValue);
+        var expected = new GuessResultDto(
+            1,
+            guessValue,
+            bulls,
+            cows,
+            expectedStatus);
+        var expectedDigits = guessValue.Select(ch => ch - '0').ToArray();
+
+        // Act
+        var actual = _sut.MakeGuess(request);
+
+        // Assert
+        actual.Should().BeEquivalentTo(expected);
+
+        sessionMock.Verify(x => x.MakeGuess(
+            It.Is<Guess>(guess => guess.Value.SequenceEqual(expectedDigits))),
+            Times.Once);
+
+        _sut.SecretCode.Should().Be(expectedRevealedSecret);
     }
 
     private static Mock<IGameSession> CreateSession(
