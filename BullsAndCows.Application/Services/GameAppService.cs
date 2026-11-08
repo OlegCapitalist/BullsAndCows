@@ -23,9 +23,7 @@ public class GameAppService : IGameAppService
 
     public GameStateDto StartGame(StartGameRequest request)
     {
-        var settings = new GameSettings(
-            codeLength: request.CodeLength,
-            maxAttempts: request.MaxAttempts);
+        var settings = new GameSettings(request.CodeLength, request.MaxAttempts);
 
         _currentSession = _gameEngine.StartNewGame(settings);
 
