@@ -125,6 +125,98 @@ public class GameAppServiceTests
         _sut.SecretCode.Should().Be(expectedRevealedSecret);
     }
 
+    [Theory]
+    [InlineData(GameStatus.InProgress, GameStatusDto.InProgress, 0)]
+    [InlineData(GameStatus.Won, GameStatusDto.Won, 3)]
+    [InlineData(GameStatus.Lost, GameStatusDto.Lost, 10)]
+    public void GetState_ShouldReturnCurrentSessionState(
+        GameStatus status,
+        GameStatusDto expectedStatus,
+        int attemptsCount)
+    {
+        // Arrange
+        var sessionMock = CreateSession([1, 2, 3, 4]);
+
+        _engineMock
+            .Setup(x => x.StartNewGame(It.IsAny<GameSettings>()))
+            .Returns(sessionMock.Object);
+
+        _sut.StartGame(new StartGameRequest(4, 10));
+
+        // Имитируем изменение состояния сессии после начала игры.
+        sessionMock.SetupGet(x => x.Status).Returns(status);
+        sessionMock.SetupGet(x => x.AttemptsCount).Returns(attemptsCount);
+
+        var expected = new GameStateDto(
+            Status: expectedStatus,
+            CodeLength: 4,
+            AttemptsCount: attemptsCount);
+
+        // Act
+        var actual = _sut.GetState();
+
+        // Assert
+        actual.Should().BeEquivalentTo(expected);
+    }
+
+    [Fact]
+    public void MakeGuess_ShouldThrowWhenGameIsNotStarted()
+    {
+        // Act
+        Action act = () => _sut.MakeGuess(new MakeGuessRequest("1234"));
+
+        // Assert
+        act.Should().Throw<InvalidOperationException>()
+            .WithMessage("Game is not started.");
+    }
+
+    [Fact]
+    public void GetState_ShouldThrowWhenGameIsNotStarted()
+    {
+        // Act
+        Action act = () => _sut.GetState();
+
+        // Assert
+        act.Should().Throw<InvalidOperationException>()
+            .WithMessage("Game is not started.");
+    }
+
+    [Fact]
+    public void StartGame_ShouldHideSecretFromPreviousLostGame()
+    {
+        // Arrange
+        var previousSession = CreateSession([1, 2, 3, 4]);
+        var newSession = CreateSession([4, 3, 2, 1]);
+
+        _engineMock
+            .SetupSequence(x => x.StartNewGame(It.IsAny<GameSettings>()))
+            .Returns(previousSession.Object)
+            .Returns(newSession.Object);
+
+        var previousStatus = GameStatus.InProgress;
+        var previousAttempts = 0;
+        previousSession.SetupGet(x => x.Status).Returns(() => previousStatus);
+        previousSession.SetupGet(x => x.AttemptsCount).Returns(() => previousAttempts);
+        previousSession.Setup(x => x.MakeGuess(It.IsAny<Guess>()))
+            .Callback<Guess>(_ =>
+            {
+                previousAttempts++;
+                previousStatus = GameStatus.Lost;
+            })
+            .Returns(new GuessResult(0, 0));
+
+        _sut.StartGame(new StartGameRequest(4, 1));
+        _sut.MakeGuess(new MakeGuessRequest("5678"));
+
+        _sut.SecretCode.Should().Be("1234");
+
+        // Act
+        _sut.StartGame(new StartGameRequest(4, 10));
+
+        // Assert
+        _sut.SecretCode.Should().BeEmpty();
+    }
+
     private static Mock<IGameSession> CreateSession(
         int[] digits,
         GameStatus status = GameStatus.InProgress,
