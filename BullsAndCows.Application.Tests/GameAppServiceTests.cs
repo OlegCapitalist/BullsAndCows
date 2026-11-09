@@ -1,5 +1,4 @@
 ﻿using BullsAndCows.Application.DTOs;
-using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Application.Services;
 using BullsAndCows.Core.Enums;
 using BullsAndCows.Core.Interfaces;

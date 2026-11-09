@@ -2,7 +2,7 @@ BullsAndCows/
 │
 ├── src/
 │   │
-│   ├── BullsAndCows.Maui/
+│   ├── BullsAndCows.UI/
 │   │   ├── Platforms/
 │   │   │   ├── Android/
 │   │   │   ├── iOS/
@@ -13,27 +13,25 @@ BullsAndCows/
 │   │   │   ├── AppIcon/
 │   │   │   ├── Fonts/
 │   │   │   ├── Images/
+│   │   │   ├── Localization/
 │   │   │   ├── Raw/
 │   │   │   └── Styles/
 │   │   │
 │   │   ├── Views/
-│   │   │   ├── MainPage.xaml
+│   │   │   ├── HomePage.xaml
 │   │   │   ├── GamePage.xaml
 │   │   │   ├── SettingsPage.xaml
-│   │   │   ├── RulesPage.xaml
-│   │   │   └── StatisticsPage.xaml
+│   │   │   ├── RecordsPage.xaml
+│   │   │   └── HelpPage.xaml
 │   │   │
 │   │   ├── ViewModels/
-│   │   │   ├── MainViewModel.cs
 │   │   │   ├── GameViewModel.cs
 │   │   │   ├── SettingsViewModel.cs
-│   │   │   ├── RulesViewModel.cs
-│   │   │   └── StatisticsViewModel.cs
+│   │   │   └── RecordsPageViewModel.cs
 │   │   │
 │   │   ├── Services/
-│   │   │   ├── NavigationService.cs
-│   │   │   ├── DialogService.cs
-│   │   │   └── PreferencesService.cs
+│   │   │   ├── LocalizationService.cs
+│   │   │   └── ThemeService.cs
 │   │   │
 │   │   ├── App.xaml
 │   │   ├── AppShell.xaml
@@ -45,8 +43,7 @@ BullsAndCows/
 │   │   │   ├── GameSession.cs
 │   │   │   ├── GameEngine.cs
 │   │   │   ├── GuessEvaluator.cs
-│   │   │   ├── SecretCodeGenerator.cs
-│   │   │   └── GameRules.cs
+│   │   │   └── SecretCodeGenerator.cs
 │   │   │
 │   │   ├── Models/
 │   │   │   ├── SecretCode.cs
