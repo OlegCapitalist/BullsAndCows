@@ -119,6 +119,61 @@ public class SettingsServiceTests
             x => x.SaveUserSettingsAsync(settings, It.IsAny<CancellationToken>()),
             Times.Once);
     }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(0)]
+    [InlineData(11)]
+    public async Task SaveSettingsAsync_ShouldRejectInvalidCodeLength(int codeLength)
+    {
+        // Arrange
+        var settings = CreateSettings(codeLength, 10);
+
+        // Act
+        Func<Task> act = () => _sut.SaveSettingsAsync(settings);
+
+        // Assert
+        var exception = await act.Should().ThrowAsync<ArgumentOutOfRangeException>();
+        exception.Which.ParamName.Should().Be(nameof(UserSettings.CodeLength));
+        _storageMock.Verify(
+            x => x.SaveUserSettingsAsync(It.IsAny<UserSettings>(), It.IsAny<CancellationToken>()),
+            Times.Never);
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(0)]
+    public async Task SaveSettingsAsync_ShouldRejectInvalidMaxAttempts(int maxAttempts)
+    {
+        // Arrange
+        var settings = CreateSettings(4, maxAttempts);
+
+        // Act
+        Func<Task> act = () => _sut.SaveSettingsAsync(settings);
+
+        // Assert
+        var exception = await act.Should().ThrowAsync<ArgumentOutOfRangeException>();
+        exception.Which.ParamName.Should().Be(nameof(UserSettings.MaxAttempts));
+        _storageMock.Verify(
+            x => x.SaveUserSettingsAsync(It.IsAny<UserSettings>(), It.IsAny<CancellationToken>()),
+            Times.Never);
+    }
+
+    [Fact]
+    public async Task GetSettingsAsync_ShouldPropagateStorageFailure()
+    {
+        // Arrange
+        _storageMock
+            .Setup(x => x.LoadUserSettingsAsync(It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new IOException("Test storage error"));
+
+        // Act
+        Func<Task> act = async () => await _sut.GetSettingsAsync();
+
+        // Assert
+        await act.Should().ThrowAsync<IOException>();
+    }
+
     private static UserSettings CreateSettings(
         int codeLength = 4,
         int maxAttempts = 10) =>
