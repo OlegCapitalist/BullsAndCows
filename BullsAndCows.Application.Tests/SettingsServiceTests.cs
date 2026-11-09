@@ -1,13 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using BullsAndCows.Application.Interfaces;
+﻿using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Application.Models;
 using BullsAndCows.Application.Services;
 using FluentAssertions;
 using Moq;
-using Xunit;
 
 namespace BullsAndCows.Application.Tests;
 

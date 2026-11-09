@@ -1,7 +1,8 @@
-﻿using System.Text.Json;
-using BullsAndCows.Application.DTOs;
+﻿using BullsAndCows.Application.DTOs;
 using BullsAndCows.Application.Interfaces;
 using BullsAndCows.Application.Models;
+using System.IO.Abstractions;
+using System.Text.Json;
 
 namespace BullsAndCows.Infrastructure.Storage;
 
@@ -13,17 +14,21 @@ public class JsonSettingsStorage : ISettingsStorage
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 
+    private readonly IFileSystem _fileSystem;
     private readonly string _filePath = String.Empty;
     private readonly Func<CancellationToken, Task<Stream>> _defaultSettingsStreamFactory;
     private AppSettingsDto? _current = null;
 
     public JsonSettingsStorage(string filePath,
-        Func<CancellationToken, Task<Stream>> defaultSettingsStreamFactory)
+        Func<CancellationToken, Task<Stream>> defaultSettingsStreamFactory,
+        IFileSystem fileSystem)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
         ArgumentNullException.ThrowIfNull(defaultSettingsStreamFactory);
+        ArgumentNullException.ThrowIfNull(fileSystem);
 
         _filePath = filePath;
+        _fileSystem = fileSystem;
         _defaultSettingsStreamFactory = defaultSettingsStreamFactory;
     }
 
@@ -62,13 +67,16 @@ public class JsonSettingsStorage : ISettingsStorage
     {
         await EnsureCreatedAsync(cancellationToken);
 
-        await using (var stream = new FileStream(
+        await using (var stream = _fileSystem.File.Open(
             _filePath,
-            FileMode.Open,
-            FileAccess.Read,
-            FileShare.Read,
-            bufferSize: 4096,
-            useAsync: true))
+            new FileStreamOptions
+            {
+                Mode = FileMode.Open,
+                Access = FileAccess.Read,
+                Share = FileShare.Read,
+                BufferSize = 4096,
+                Options = FileOptions.Asynchronous
+            }))
         {
             _current = await JsonSerializer.DeserializeAsync<AppSettingsDto>(
                 utf8Json: stream,
@@ -76,6 +84,7 @@ public class JsonSettingsStorage : ISettingsStorage
                 cancellationToken: cancellationToken)
                 ?? throw new InvalidDataException(
                     "Settings file does not contain a valid object.");
+
             return _current;
         }
     }
@@ -89,44 +98,51 @@ public class JsonSettingsStorage : ISettingsStorage
         var directory = Path.GetDirectoryName(_filePath);
 
         if (!string.IsNullOrWhiteSpace(directory))
-            Directory.CreateDirectory(directory);
+            _fileSystem.Directory.CreateDirectory(directory);
 
-        await using (var stream = new FileStream(
+        await using (var stream = _fileSystem.File.Open(
             _filePath,
-            FileMode.Create,
-            FileAccess.Write,
-            FileShare.None,
-            bufferSize: 4096,
-            useAsync: true))
+            new FileStreamOptions
         {
-            await JsonSerializer.SerializeAsync(
-                        stream,
-                        settings,
-                        jsonOptions,
-                        cancellationToken);
+            Mode = FileMode.Create,
+            Access = FileAccess.Write,
+            Share = FileShare.None,
+            BufferSize = 4096,
+            Options = FileOptions.Asynchronous
+        }))
+            {
+                await JsonSerializer.SerializeAsync(
+                    stream,
+                    settings,
+                    jsonOptions,
+                    cancellationToken);
+            }
         }
-    }
 
-    private async Task EnsureCreatedAsync(CancellationToken cancellationToken = default)
+    private async Task EnsureCreatedAsync(
+    CancellationToken cancellationToken = default)
     {
-        if (File.Exists(_filePath))
+        if (_fileSystem.File.Exists(_filePath))
             return;
 
-        var directory = Path.GetDirectoryName(_filePath);
+        var directory = _fileSystem.Path.GetDirectoryName(_filePath);
 
         if (!string.IsNullOrWhiteSpace(directory))
-            Directory.CreateDirectory(directory);
+            _fileSystem.Directory.CreateDirectory(directory);
 
         await using var sourceStream =
             await _defaultSettingsStreamFactory(cancellationToken);
 
-        await using var destinationStream = new FileStream(
+        await using var destinationStream = _fileSystem.File.Open(
             _filePath,
-            FileMode.CreateNew,
-            FileAccess.Write,
-            FileShare.None,
-            bufferSize: 4096,
-            useAsync: true);
+            new FileStreamOptions
+            {
+                Mode = FileMode.CreateNew,
+                Access = FileAccess.Write,
+                Share = FileShare.None,
+                BufferSize = 4096,
+                Options = FileOptions.Asynchronous
+            });
 
         await sourceStream.CopyToAsync(
             destinationStream,
