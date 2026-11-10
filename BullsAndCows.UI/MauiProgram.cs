@@ -9,6 +9,9 @@ using BullsAndCows.UI.ViewModels;
 using BullsAndCows.UI.Views;
 using Microsoft.Extensions.Logging;
 using BullsAndCows.Infrastructure.Repositories;
+using AbstractionsIFileSystem = System.IO.Abstractions.IFileSystem;
+using AbstractionsFileSystem = System.IO.Abstractions.FileSystem;
+using MauiFileSystem = Microsoft.Maui.Storage.FileSystem;
 
 namespace BullsAndCows.UI;
 
@@ -27,22 +30,27 @@ public static class MauiProgram
 
         builder.Services.AddApplication();
 
+        builder.Services.AddSingleton<AbstractionsIFileSystem, AbstractionsFileSystem>();
+
         var settingsFilePath = Path.Combine(
-            FileSystem.AppDataDirectory,
+            MauiFileSystem.AppDataDirectory,
             "appsettings.json");
 
-        builder.Services.AddSingleton<ISettingsStorage>(
+
+        builder.Services.AddSingleton<ISettingsStorage>(sp =>
             new JsonSettingsStorage(
                 settingsFilePath,
-                _ => FileSystem.OpenAppPackageFileAsync("appsettings.json")));
+                _ => MauiFileSystem.OpenAppPackageFileAsync("appsettings.json"),
+                sp.GetRequiredService<AbstractionsIFileSystem>()));
 
         builder.Services.AddSingleton(sp =>
         new GameDatabase(
             sp.GetRequiredService<ISettingsStorage>(),
-            FileSystem.AppDataDirectory));
+            MauiFileSystem.AppDataDirectory));
 
         builder.Services.AddSingleton<ISettingsService, SettingsService>();
         builder.Services.AddSingleton<IThemeService, ThemeService>();
+        builder.Services.AddSingleton<AbstractionsIFileSystem, AbstractionsFileSystem>();
 
         builder.Services.AddSingleton<IGameRecordRepository, Repository>();
 
