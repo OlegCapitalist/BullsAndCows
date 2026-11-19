@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using BullsAndCows.Core.Game;
 
-namespace BullsAndCows.Core.Tests.Game;
+namespace BullsAndCows.Core.UnitTests;
 
 public class SecretCodeGeneratorTests
 {

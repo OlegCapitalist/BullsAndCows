@@ -6,7 +6,7 @@ using BullsAndCows.Core.Models;
 using FluentAssertions;
 using Moq;
 
-namespace BullsAndCows.Application.Tests;
+namespace BullsAndCows.Application.UnitTests;
 
 public class GameAppServiceTests
 {

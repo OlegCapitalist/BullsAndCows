@@ -6,7 +6,7 @@ using BullsAndCows.Core.Models;
 using FluentAssertions;
 using Moq;
 
-namespace BullsAndCows.Core.Tests.Game;
+namespace BullsAndCows.Core.UnitTests;
 
 public class GameSessionTests
 {

@@ -2,7 +2,7 @@
 using BullsAndCows.Core.Models;
 using FluentAssertions;
 
-namespace BullsAndCows.Core.Tests.Game;
+namespace BullsAndCows.Core.UnitTests;
 
 public class GuessEvaluatorTests
 {

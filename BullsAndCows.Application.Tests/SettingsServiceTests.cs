@@ -4,7 +4,7 @@ using BullsAndCows.Application.Services;
 using FluentAssertions;
 using Moq;
 
-namespace BullsAndCows.Application.Tests;
+namespace BullsAndCows.Application.UnitTests;
 
 public class SettingsServiceTests
 {

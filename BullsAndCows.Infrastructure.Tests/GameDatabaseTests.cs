@@ -4,7 +4,7 @@ using BullsAndCows.Infrastructure.DataBase;
 using FluentAssertions;
 using Moq;
 
-namespace BullsAndCows.Infrastructure.Tests;
+namespace BullsAndCows.Infrastructure.UnitTests;
 
 public class GameDatabaseTests
 {

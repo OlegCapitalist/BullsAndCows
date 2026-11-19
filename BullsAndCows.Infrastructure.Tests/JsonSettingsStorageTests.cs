@@ -5,7 +5,7 @@ using System.IO.Abstractions.TestingHelpers;
 using System.Text;
 using System.Text.Json;
 
-namespace BullsAndCows.Infrastructure.Tests;
+namespace BullsAndCows.Infrastructure.UnitTests;
 
 public class JsonSettingsStorageTests
 {

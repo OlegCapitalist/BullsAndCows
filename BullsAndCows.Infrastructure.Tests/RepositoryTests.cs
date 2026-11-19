@@ -5,7 +5,7 @@ using BullsAndCows.Infrastructure.Repositories;
 using FluentAssertions;
 using Moq;
 
-namespace BullsAndCows.Infrastructure.Tests;
+namespace BullsAndCows.Infrastructure.UnitTests;
 
 // SQLiteAsyncConnection pools connections by database path.
 // The shared ':memory:' path must not be used by parallel tests.
