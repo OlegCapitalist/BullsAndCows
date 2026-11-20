@@ -19,19 +19,32 @@
         <Image
             Grid.Row="0"
             Source="help.png"
+            HeightRequest="220"
             Aspect="AspectFit"
             HorizontalOptions="Center"
             VerticalOptions="Center" />
 
-        <ScrollView
-            Grid.Row="1"
-            IsVisible="{Binding IsHelpTextVisible}">
+        <ScrollView Grid.Row="1"
+                    IsVisible="{Binding IsHelpTextVisible}">
 
-            <Label
-                Text="{Binding HelpText}"
-                Margin="20,10"
-                VerticalOptions="Start"
-                HorizontalOptions="Fill" />
+            <Border
+                Margin="16,8"
+                Padding="16"
+                BackgroundColor="{AppThemeBinding Light=#FAFAFA, Dark=#202020}"
+                StrokeThickness="1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16"/>
+                    </Border.StrokeShape>
+
+                    <Label
+                        Text="{Binding HelpText}"
+                        FontSize="16"
+                        LineHeight="1.35"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+            </Border>
 
         </ScrollView>
 
