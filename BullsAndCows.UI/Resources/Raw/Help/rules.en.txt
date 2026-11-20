@@ -1,1 +1,56 @@
-The game
+The goal of the game is to guess the secret code within a limited number of attempts.
+
+The secret code consists of non-repeating digits. For example, for a four-digit code, the computer may choose:
+
+4271
+
+Enter your own combination of four different digits and press “Check”.
+
+After each attempt, the game will show the number of bulls and cows.
+
+BULL
+
+A bull means that a digit is correct and is in the correct position.
+
+COW
+
+A cow means that a digit is present in the secret code but is in a different position.
+
+EXAMPLE
+
+Suppose the secret code is:
+
+4271
+
+You entered:
+
+4725
+
+Result:
+
+1 bull, 2 cows
+
+Why?
+
+• Digit 4 is in the correct position — this is 1 bull.
+• Digit 7 is in the secret code but is in a different position — this is 1 cow.
+• Digit 2 is in the secret code but is in a different position — this is another cow.
+• Digit 5 is not in the secret code.
+
+To win, you must guess the entire code.
+
+For the secret code 4271, the correct answer is:
+
+4271
+
+Result:
+
+4 bulls, 0 cows
+
+The game ends in victory when all digits are in their correct positions.
+
+If you run out of available attempts before guessing the code, the game ends in defeat and reveals the secret code.
+
+In the settings, you can change the length of the secret code and the number of available attempts.
+
+Good luck!

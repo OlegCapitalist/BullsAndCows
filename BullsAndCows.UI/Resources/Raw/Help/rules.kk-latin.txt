@@ -1,1 +1,56 @@
-﻿Oiyn
+﻿Oiynnyń maqsaty — şekteuli äreketter sany işinde jasyrın kodty tabu.
+
+Jasyrın kod qaitalanbaityn cifrlardan turady. Mysaly, tört tańbaly kod üşin kompiuter mynaı kod jasyruy mümkin:
+
+4271
+
+Tört türli cifrdan turatyn kombinaciiańyzdy engizip, «Tekseru» tüimesin basyńyz.
+
+Är äreketten keiın oiyn būqalar men siyırlardyń sanyn körsetedi.
+
+BŪQA
+
+Būqa — cifr dūrys tabylğanyn jäne dūrys orynda turğanyn bildiredi.
+
+SIYR
+
+Siyr — cifr jasyrın kodta bar ekenin, biraq basqa orynda turğanyn bildiredi.
+
+MYSAL
+
+Jasyrın kod mynadai bolsyn:
+
+4271
+
+Siz engizdińiz:
+
+4725
+
+Nätije:
+
+1 būqa, 2 siyr
+
+Nelikten?
+
+• 4 cifry dūrys orynda tur — būl 1 būqa.
+• 7 cifry jasyrın kodta bar, biraq basqa orynda tur — būl 1 siyr.
+• 2 cifry jasyrın kodta bar, biraq basqa orynda tur — būl tağy 1 siyr.
+• 5 cifry jasyrın kodta joq.
+
+Jeńu üşin bükil kodty dūrys tabu kerek.
+
+4271 jasyrın kody üşin dūrys jauap:
+
+4271
+
+Nätije:
+
+4 būqa, 0 siyr
+
+Barlyq cifrlar öz oryndarynda turğanda oiyn jeńispen ayaqtalady.
+
+Eger kod tabylğanğa deiın qoljetimdi äreketter sany tausylsa, oiyn jeńilispen ayaqtalyp, jasyrın kod körsetiledi.
+
+Baptaularda jasyrın kodtyń ūzyndyğyn jäne qoljetimdi äreketter sanyn özgertuge bolady.
+
+Sättilik!
