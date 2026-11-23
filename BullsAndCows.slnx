@@ -11,11 +11,13 @@
     </Project>
   </Folder>
   <Folder Name="/tests/" />
-  <Folder Name="/tests/Integration/" />
+  <Folder Name="/tests/Integration/">
+    <Project Path="BullsAndCows.UI.IntegrationTests/BullsAndCows.UI.IntegrationTests.csproj" Id="955a7d57-34bf-47fa-b99b-c7c4cbcd4ef0" />
+  </Folder>
   <Folder Name="/tests/Unit/">
     <Project Path="BullsAndCows.Application.Tests/BullsAndCows.Application.UnitTests.csproj" Id="9c7227ba-bca1-4a0e-b598-068d03d91721" />
     <Project Path="BullsAndCows.Core.Tests/BullsAndCows.Core.UnitTests.csproj" Id="f51b2482-f876-49d5-82ac-eeee07f6bba6" />
     <Project Path="BullsAndCows.Infrastructure.Tests/BullsAndCows.Infrastructure.UnitTests.csproj" Id="c64957ed-8a87-4409-9815-3194b314b3f8" />
-    <Project Path="BullsAndCows.UI.Tests/BullsAndCows.UI.Tests.csproj" Id="c4feed54-60b8-47f4-b210-1c96add747f5" />
+    <Project Path="BullsAndCows.UI.Tests/BullsAndCows.UI.UnitTests.csproj" Id="c4feed54-60b8-47f4-b210-1c96add747f5" />
   </Folder>
 </Solution>
