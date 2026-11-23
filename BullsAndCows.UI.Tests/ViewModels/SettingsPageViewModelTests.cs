@@ -11,7 +11,7 @@ using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace BullsAndCows.UI.Tests.ViewModels;
+namespace BullsAndCows.UI.UnitTests.ViewModels;
 
 public class SettingsPageViewModelTests
 {

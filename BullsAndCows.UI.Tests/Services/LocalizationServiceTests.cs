@@ -5,7 +5,7 @@ using BullsAndCows.UI.Services;
 using FluentAssertions;
 using Xunit;
 
-namespace BullsAndCows.UI.Tests.Services;
+namespace BullsAndCows.UI.UnitTests.Services;
 
 // CultureInfo.DefaultThreadCurrentCulture and DefaultThreadCurrentUICulture
 // affect the process, so these tests should not run alongside other tests.

@@ -3,7 +3,7 @@ using BullsAndCows.UI.Services;
 using FluentAssertions;
 using MauiControlsApplication = Microsoft.Maui.Controls.Application;
 
-namespace BullsAndCows.UI.Tests.Services;
+namespace BullsAndCows.UI.UnitTests.Services;
 
 [CollectionDefinition("ThemeServiceApplication", DisableParallelization = true)]
 public sealed class ThemeServiceApplicationCollection
