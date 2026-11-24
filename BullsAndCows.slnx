@@ -13,9 +13,9 @@
     <Project Path="tests/IntegrationTests/BullsAndCows.UI.IntegrationTests/BullsAndCows.UI.IntegrationTests.csproj" />
   </Folder>
   <Folder Name="/tests/UnitTests/">
-    <Project Path="tests/UnitTests/BullsAndCows.Application.Tests/BullsAndCows.Application.UnitTests.csproj" />
-    <Project Path="tests/UnitTests/BullsAndCows.Core.Tests/BullsAndCows.Core.UnitTests.csproj" />
-    <Project Path="tests/UnitTests/BullsAndCows.Infrastructure.Tests/BullsAndCows.Infrastructure.UnitTests.csproj" />
-    <Project Path="tests/UnitTests/BullsAndCows.UI.Tests/BullsAndCows.UI.UnitTests.csproj" />
+    <Project Path="tests/UnitTests/BullsAndCows.Application.UnitTests/BullsAndCows.Application.UnitTests.csproj" />
+    <Project Path="tests/UnitTests/BullsAndCows.Core.UnitTests/BullsAndCows.Core.UnitTests.csproj" />
+    <Project Path="tests/UnitTests/BullsAndCows.Infrastructure.UnitTests/BullsAndCows.Infrastructure.UnitTests.csproj" />
+    <Project Path="tests/UnitTests/BullsAndCows.UI.UnitTests/BullsAndCows.UI.UnitTests.csproj" />
   </Folder>
 </Solution>
