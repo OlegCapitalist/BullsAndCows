@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BullsAndCows.Core\BullsAndCows.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\BullsAndCows.Application\BullsAndCows.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\BullsAndCows.Core\BullsAndCows.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
