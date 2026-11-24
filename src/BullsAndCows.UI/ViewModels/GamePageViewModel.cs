@@ -69,6 +69,9 @@ public class GamePageViewModel
         SecretCode = "";
         Attempts.Clear();
 
+        Guess = "";
+        AttemptsCount = 0;
+
         Status = result.Status;
     }
 
