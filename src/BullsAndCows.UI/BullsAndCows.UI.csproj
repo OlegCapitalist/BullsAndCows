@@ -28,10 +28,10 @@
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
 
 		<!-- Display name -->
-		<ApplicationTitle>BullsAndCows.UI</ApplicationTitle>
+		<ApplicationTitle>Bulls and Cows</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.bullsandcows.ui</ApplicationId>
+		<ApplicationId>com.bullsandcows.game</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
